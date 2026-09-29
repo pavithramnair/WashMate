@@ -7,7 +7,7 @@
 const GingerApp = {
   data: INITIAL_DATA,
   currentModule: 'dashboard',
-  currentTheme: 'dark',
+  currentTheme: 'light',
   filters: {
     bookings: { search: '', status: 'all', payment: 'all' },
     packages: { search: '', type: 'all', vehicle: 'all', status: 'all', priceRange: 'all' },
@@ -38,7 +38,12 @@ const GingerApp = {
   // THEME MANAGEMENT (LIGHT / DARK MODE)
   // =========================================================================
   initTheme: function () {
-    const savedTheme = localStorage.getItem('ginger_theme') || 'dark';
+    let savedTheme = 'light';
+    if (localStorage.getItem('ginger_theme_user_set') === 'true') {
+      savedTheme = localStorage.getItem('ginger_theme') || 'light';
+    } else {
+      localStorage.setItem('ginger_theme', 'light');
+    }
     this.setTheme(savedTheme);
   },
 
@@ -79,6 +84,7 @@ const GingerApp = {
 
   toggleTheme: function () {
     const nextTheme = this.currentTheme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('ginger_theme_user_set', 'true');
     this.setTheme(nextTheme);
     this.showToast(`Switched to ${nextTheme === 'light' ? 'Light' : 'Dark'} Mode`, 'info');
     // Refresh SVG charts to match theme contrast

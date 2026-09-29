@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Ginger Carwash Services - Professional Car Wash & Detailing Management Platform</title>
+  <title>Ginger WashMate - Professional Car Wash & Detailing Management Platform</title>
   <meta name="description"
     content="Production-grade SaaS Car Wash & Detailing Operations System for Ginger Carwash Services. Manage packages, bookings, 11-stage workflow, customers, vehicles, inventory, staff, and billing.">
 
@@ -21,11 +21,15 @@
       if (!isAuth) {
         document.documentElement.classList.add('washmate-unauthenticated');
       }
+      var theme = localStorage.getItem('ginger_theme_user_set') === 'true'
+        ? (localStorage.getItem('ginger_theme') || 'light')
+        : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
     })();
   </script>
 </head>
 
-<body data-theme="dark">
+<body data-theme="light">
 
   <!-- =====================================================================
        FULL-SCREEN ADMIN LOGIN SCREEN - GINGER WASHMATE
@@ -43,10 +47,10 @@
       <!-- Logo Container -->
       <div class="login-logo-container">
         <div class="login-logo-badge">
-          <img src="assets/images/logo-carwash.png" alt="Ginger WashMate Logo" class="login-logo-img">
+          <img src="assets/images/washmate_master_logo.png" alt="Ginger WashMate Logo" class="login-logo-img">
         </div>
         <div class="login-portal-badge">Admin Portal Login</div>
-        <h1 class="login-card-title">Ginger WashMate</h1>
+        <p class="login-card-subtitle">Sign in to your administrative dashboard</p>
       </div>
 
       <!-- Error Alert Message -->
@@ -170,11 +174,8 @@
     <aside class="sidebar" id="main-sidebar">
       <div class="sidebar-header">
         <a href="#" class="brand-wrapper" onclick="GingerApp.navigateTo('dashboard'); return false;">
-          <div class="brand-icon" id="sidebar-brand-icon">
-            <img src="./assets/images/logo-carwash.png" alt="">
-          </div>
           <div class="brand-info">
-            <span class="brand-name">Ginger <span class="brand-badge">CARWASH</span></span>
+            <span class="brand-name" style="font-size: 16px; font-weight: 800; letter-spacing: -0.2px; color: #ffffff;">Ginger <span style="color: #38bdf8;">WashMate</span></span>
           </div>
         </a>
         <button class="sidebar-collapse-btn" id="sidebar-toggle-btn" title="Toggle Sidebar">
@@ -384,7 +385,7 @@
             </svg>
           </button>
           <nav class="page-breadcrumb">
-            <a href="#" onclick="GingerApp.navigateTo('dashboard'); return false;">Ginger Carwash Services</a>
+            <a href="#" onclick="GingerApp.navigateTo('dashboard'); return false;">Ginger WashMate</a>
             <span class="page-breadcrumb-separator">/</span>
             <span class="page-breadcrumb-current" id="topbar-breadcrumb-current">Operational Dashboard</span>
           </nav>
@@ -413,17 +414,9 @@
           </button>
           <!-- LIGHT / DARK MODE TOGGLE BUTTON -->
           <button class="topbar-action-btn" id="theme-toggle-btn" onclick="GingerApp.toggleTheme()"
-            title="Toggle Light / Dark Mode">
+            title="Switch to Dark Mode">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="5"></circle>
-              <line x1="12" y1="1" x2="12" y2="3"></line>
-              <line x1="12" y1="21" x2="12" y2="23"></line>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-              <line x1="1" y1="12" x2="3" y2="12"></line>
-              <line x1="21" y1="12" x2="23" y2="12"></line>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
           </button>
 
