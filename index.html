@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
   <title>Ginger Carwash Services - Professional Car Wash & Detailing Management Platform</title>
   <meta name="description"
     content="Production-grade SaaS Car Wash & Detailing Operations System for Ginger Carwash Services. Manage packages, bookings, 11-stage workflow, customers, vehicles, inventory, staff, and billing.">
@@ -13,9 +14,132 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/print.css" media="print">
+  <script>
+    // Early authentication check to prevent FOUC (flash of unauthenticated content)
+    (function () {
+      var isAuth = sessionStorage.getItem('washmate_auth') === 'true';
+      if (!isAuth) {
+        document.documentElement.classList.add('washmate-unauthenticated');
+      }
+    })();
+  </script>
 </head>
 
 <body data-theme="dark">
+
+  <!-- =====================================================================
+       FULL-SCREEN ADMIN LOGIN SCREEN - GINGER WASHMATE
+       ===================================================================== -->
+  <div id="washmate-login-screen" class="washmate-login-overlay">
+    <!-- Animated background bubbles -->
+    <div class="login-bg-bubble bubble-1"></div>
+    <div class="login-bg-bubble bubble-2"></div>
+    <div class="login-bg-bubble bubble-3"></div>
+    <div class="login-bg-bubble bubble-4"></div>
+    <div class="login-bg-bubble bubble-5"></div>
+    <div class="login-bg-bubble bubble-6"></div>
+
+    <div class="washmate-login-card" id="washmate-login-card">
+      <!-- Logo Container -->
+      <div class="login-logo-container">
+        <div class="login-logo-badge">
+          <img src="assets/images/logo-carwash.png" alt="Ginger WashMate Logo" class="login-logo-img">
+        </div>
+        <div class="login-portal-badge">Admin Portal Login</div>
+        <h1 class="login-card-title">Ginger WashMate</h1>
+      </div>
+
+      <!-- Error Alert Message -->
+      <div id="login-error-alert" class="login-error-alert" style="display: none;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span id="login-error-text">Invalid username or password. Please try again.</span>
+      </div>
+
+      <!-- Login Form -->
+      <form id="washmate-login-form" onsubmit="GingerApp.handleAdminLogin(event); return false;" autocomplete="off">
+        <div class="login-form-group">
+          <label class="login-field-label" for="login-username">
+            <span>Username / Admin Email</span>
+          </label>
+          <div class="login-input-wrapper">
+            <svg class="login-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <input 
+              type="text" 
+              id="login-username" 
+              class="login-text-input" 
+              placeholder="Username" 
+              required 
+              autocomplete="username"
+            >
+          </div>
+        </div>
+
+        <div class="login-form-group">
+          <div class="login-field-label-row">
+            <label class="login-field-label" for="login-password">
+              <span>Password</span>
+            </label>
+          </div>
+          <div class="login-input-wrapper">
+            <svg class="login-input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <input 
+              type="password" 
+              id="login-password" 
+              class="login-text-input" 
+              placeholder="Password" 
+              required 
+              autocomplete="current-password"
+            >
+            <button 
+              type="button" 
+              class="login-password-toggle" 
+              id="login-password-toggle" 
+              onclick="GingerApp.toggleLoginPasswordVisibility()" 
+              title="Toggle password visibility"
+              tabindex="-1"
+            >
+              <svg id="toggle-eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="login-remember-row">
+          <label class="login-checkbox-label">
+            <input type="checkbox" id="login-remember-me" checked>
+            <span>Remember session on station</span>
+          </label>
+        </div>
+
+        <button type="submit" id="login-submit-button" class="login-btn-submit">
+          <span class="btn-text">Sign In to Admin Portal</span>
+          <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+          <div class="btn-spinner" style="display: none;"></div>
+        </button>
+      </form>
+
+      <!-- Footer Info -->
+      <div class="login-card-footer">
+        <span>Copyright 2026 Ginger WashMate. All rights reserved.</span>
+      </div>
+    </div>
+  </div>
+
   <div id="app-root">
 
     <!-- Mobile sidebar overlay backdrop -->
@@ -31,7 +155,8 @@
         <input type="text" class="global-search-input" id="mobile-search-input"
           placeholder="Search packages, customers, plates, bookings...">
       </div>
-      <button class="mobile-search-close" id="mobile-search-close-btn" onclick="GingerApp.closeMobileSearch()" title="Close Search">
+      <button class="mobile-search-close" id="mobile-search-close-btn" onclick="GingerApp.closeMobileSearch()"
+        title="Close Search">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="18" y1="6" x2="6" y2="18" />
           <line x1="6" y1="6" x2="18" y2="18" />
@@ -46,7 +171,7 @@
       <div class="sidebar-header">
         <a href="#" class="brand-wrapper" onclick="GingerApp.navigateTo('dashboard'); return false;">
           <div class="brand-icon" id="sidebar-brand-icon">
-            <img src="./assets/images/logo-carwash.png" alt=""> 
+            <img src="./assets/images/logo-carwash.png" alt="">
           </div>
           <div class="brand-info">
             <span class="brand-name">Ginger <span class="brand-badge">CARWASH</span></span>
@@ -219,18 +344,25 @@
         </a>
       </nav>
 
-      <div class="sidebar-footer">
-        <div class="user-profile-widget" id="sidebar-user-card" onclick="GingerApp.openLoginScreen()"
+      <div class="sidebar-footer" style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+        <div class="user-profile-widget" id="sidebar-user-card" style="flex: 1; min-width: 0;" onclick="GingerApp.openLoginScreen()"
           title="Click to Switch Account / Terminal Authorization">
           <div class="user-avatar-wrap">
-            <div class="user-avatar-img" id="sidebar-user-avatar">RK</div>
+            <div class="user-avatar-img" id="sidebar-user-avatar">WM</div>
             <div class="user-online-badge"></div>
           </div>
           <div class="user-info">
-            <span class="user-name" id="sidebar-user-name">Rashid Al-Kuwari</span>
-            <span class="user-role" id="sidebar-user-role">Operations Director</span>
+            <span class="user-name" id="sidebar-user-name">WashMate Admin</span>
+            <span class="user-role" id="sidebar-user-role">Super Admin</span>
           </div>
         </div>
+        <button type="button" class="topbar-action-btn" onclick="GingerApp.signOut()" title="Sign Out to Login Screen" style="flex-shrink: 0; color: #f87171; border-color: rgba(248, 113, 113, 0.2);">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </button>
       </div>
     </aside>
 
@@ -243,7 +375,8 @@
       <header class="topbar">
         <div class="topbar-left">
           <!-- Mobile hamburger menu -->
-          <button class="mobile-menu-btn" id="mobile-menu-btn" onclick="GingerApp.toggleMobileSidebar()" title="Open Navigation Menu">
+          <button class="mobile-menu-btn" id="mobile-menu-btn" onclick="GingerApp.toggleMobileSidebar()"
+            title="Open Navigation Menu">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="3" y1="6" x2="21" y2="6" />
               <line x1="3" y1="12" x2="21" y2="12" />
@@ -271,7 +404,8 @@
 
         <div class="topbar-right">
           <!-- Mobile search button (visible only on mobile) -->
-          <button class="mobile-search-btn" id="mobile-search-btn" onclick="GingerApp.openMobileSearch()" title="Search">
+          <button class="mobile-search-btn" id="mobile-search-btn" onclick="GingerApp.openMobileSearch()"
+            title="Search">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="11" cy="11" r="8" />
               <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -290,6 +424,16 @@
               <line x1="21" y1="12" x2="23" y2="12"></line>
               <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
               <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+
+          <!-- TOPBAR QUICK LOGOUT BUTTON -->
+          <button class="topbar-action-btn" id="topbar-logout-btn" onclick="GingerApp.signOut()"
+            title="Sign Out to Login Screen" style="color: #f87171; border-color: rgba(248, 113, 113, 0.2);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
             </svg>
           </button>
 
@@ -1786,6 +1930,11 @@
             </form>
           </div>
         </section>
+
+        <!-- Inner Dashboard Footer -->
+        <footer class="app-dashboard-footer">
+          <span>Copyright 2026 Ginger WashMate. All rights reserved.</span>
+        </footer>
 
       </main>
     </div>

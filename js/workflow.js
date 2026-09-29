@@ -1,5 +1,5 @@
-/**
- * GINGER CARWASH SERVICES - Simple Booking Status & Service Workflow Engine
+﻿/**
+ * GINGER WASHMATE - Simple Booking Status & Service Workflow Engine
  *
  * Streamlined lifecycle:
  * Booking Confirmed -> Vehicle Checked In -> Service In Progress -> Quality Check -> Ready for Pickup -> Completed (and Cancelled)
@@ -90,7 +90,7 @@ const WorkflowEngine = {
       if (b.bookingStatus === 'Cancelled') {
         stepperContainer.innerHTML = `
           <div style="width: 100%; text-align: center; padding: 10px; background: rgba(239, 68, 68, 0.1); border-radius: var(--radius-md); color: #f87171; font-weight: 700;">
-            ✕ This booking was cancelled.
+            âœ• This booking was cancelled.
           </div>
         `;
       } else {
@@ -102,7 +102,7 @@ const WorkflowEngine = {
                  onclick="WorkflowEngine.updateBookingStatus('${b.id}', '${stg.label}', 'Advanced to ${stg.label} via timeline track')"
                  title="Click to set status to ${stg.label}">
               <div class="status-step-circle">
-                ${isDone ? '✓' : stg.id}
+                ${isDone ? 'âœ“' : stg.id}
               </div>
               <div class="status-step-label">${stg.label}</div>
             </div>
@@ -168,7 +168,7 @@ const WorkflowEngine = {
 
       timelineEl.innerHTML = historyList.map((step) => `
         <div class="timeline-step-item completed">
-          <div class="timeline-marker">✓</div>
+          <div class="timeline-marker">âœ“</div>
           <div class="timeline-title-row">
             <span class="timeline-title">${step.stage}</span>
             <span class="timeline-time">${step.time}</span>

@@ -1,5 +1,5 @@
-/**
- * GINGER CARWASH SERVICES - Comprehensive Reports & Analytics Engine
+﻿/**
+ * GINGER WASHMATE - Comprehensive Reports & Analytics Engine
  * Provides dual Graphical (SVG Charts) and Tabular (Interactive Tables) views
  * for Bookings, Revenue, Services, and Staff Performance with live filtering and CSV exports.
  */
@@ -292,12 +292,12 @@ const ReportsEngine = {
       container.innerHTML = `
         <div class="kpi-card">
           <div class="kpi-label">Gross Revenue</div>
-          <div class="kpi-value" style="color: #10b981;">₹${gross.toLocaleString()}</div>
+          <div class="kpi-value" style="color: #10b981;">â‚¹${gross.toLocaleString()}</div>
           <div class="kpi-trend positive">Direct sales total</div>
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Average Ticket Size</div>
-          <div class="kpi-value">₹${avgTicket.toLocaleString()}</div>
+          <div class="kpi-value">â‚¹${avgTicket.toLocaleString()}</div>
           <div class="kpi-trend neutral">Per customer visit</div>
         </div>
         <div class="kpi-card">
@@ -307,7 +307,7 @@ const ReportsEngine = {
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Total Discounts Given</div>
-          <div class="kpi-value" style="color: #f59e0b;">₹${discounts.toLocaleString()}</div>
+          <div class="kpi-value" style="color: #f59e0b;">â‚¹${discounts.toLocaleString()}</div>
           <div class="kpi-trend neutral">Promotional & package savings</div>
         </div>
       `;
@@ -331,7 +331,7 @@ const ReportsEngine = {
         </div>
         <div class="kpi-card">
           <div class="kpi-label">Service Revenue</div>
-          <div class="kpi-value" style="color: #10b981;">₹${totalRev.toLocaleString()}</div>
+          <div class="kpi-value" style="color: #10b981;">â‚¹${totalRev.toLocaleString()}</div>
           <div class="kpi-trend positive">Service catalog turnover</div>
         </div>
         <div class="kpi-card">
@@ -401,7 +401,7 @@ const ReportsEngine = {
         <div class="chart-card">
           <div class="chart-header">
             <div class="chart-title">Revenue Trajectory Breakdown</div>
-            <span style="font-size: 11px; color: var(--text-tertiary);">Gross Sales (₹ Thousands)</span>
+            <span style="font-size: 11px; color: var(--text-tertiary);">Gross Sales (â‚¹ Thousands)</span>
           </div>
           <div class="svg-chart-container" id="chart-revenue-primary-svg"></div>
         </div>
@@ -602,7 +602,7 @@ const ReportsEngine = {
     coords.forEach(pt => {
       dotsSvg += `
         <circle cx="${pt.x}" cy="${pt.y}" r="4.5" fill="#10b981" stroke="#ffffff" stroke-width="2" style="cursor: pointer;">
-          <title>${pt.day}: ₹${(pt.val * 1000).toLocaleString()}</title>
+          <title>${pt.day}: â‚¹${(pt.val * 1000).toLocaleString()}</title>
         </circle>
       `;
       labelsSvg += `
@@ -674,9 +674,9 @@ const ReportsEngine = {
       rowsSvg += `
         <text x="12" y="${y + 14}" font-size="11.5" fill="currentColor" font-weight="600" opacity="0.85">${method}</text>
         <rect x="130" y="${y + 2}" width="${barW}" height="14" rx="4" fill="${color}" opacity="0.9">
-          <title>${method}: ₹${amt.toLocaleString()} (${pct}%)</title>
+          <title>${method}: â‚¹${amt.toLocaleString()} (${pct}%)</title>
         </rect>
-        <text x="${140 + barW}" y="${y + 13}" font-size="11" fill="currentColor" opacity="0.75" font-family="monospace">₹${amt.toLocaleString()} (${pct}%)</text>
+        <text x="${140 + barW}" y="${y + 13}" font-size="11" fill="currentColor" opacity="0.75" font-family="monospace">â‚¹${amt.toLocaleString()} (${pct}%)</text>
       `;
     });
 
@@ -705,7 +705,7 @@ const ReportsEngine = {
       const y = startY + i * rowH;
       const val = s[metricKey];
       const barW = Math.max((val / maxVal) * 200, 8);
-      const displayVal = metricKey === 'totalRevenue' ? `₹${val.toLocaleString()}` : `${val} washes`;
+      const displayVal = metricKey === 'totalRevenue' ? `â‚¹${val.toLocaleString()}` : `${val} washes`;
 
       rowsSvg += `
         <text x="12" y="${y + 14}" font-size="11" fill="currentColor" font-weight="600" opacity="0.9">${s.name.substring(0, 18)}</text>
@@ -741,7 +741,7 @@ const ReportsEngine = {
       const y = startY + i * rowH;
       const val = s[metricKey];
       const barW = Math.max((val / maxVal) * 200, 8);
-      const displayVal = metricKey === 'revenueGenerated' ? `₹${val.toLocaleString()}` : `${val} jobs`;
+      const displayVal = metricKey === 'revenueGenerated' ? `â‚¹${val.toLocaleString()}` : `${val} jobs`;
 
       rowsSvg += `
         <text x="12" y="${y + 14}" font-size="11" fill="currentColor" font-weight="600" opacity="0.9">${s.name.substring(0, 16)}</text>
@@ -795,7 +795,7 @@ const ReportsEngine = {
           <td><span style="font-family: var(--font-mono); font-weight: 600;">${b.vehiclePlate}</span></td>
           <td>${b.serviceName}</td>
           <td>${b.assignedStaff || 'Unassigned'}</td>
-          <td><strong>₹${Number(b.totalAmount || 0).toLocaleString()}</strong></td>
+          <td><strong>â‚¹${Number(b.totalAmount || 0).toLocaleString()}</strong></td>
           <td><span class="badge ${b.paymentStatus === 'paid' ? 'badge-paid' : 'badge-unpaid'}">${(b.paymentStatus || 'unpaid').toUpperCase()}</span></td>
           <td><span class="badge ${b.bookingStatus === 'Completed' ? 'badge-completed' : 'badge-progress'}">${b.bookingStatus}</span></td>
         </tr>
@@ -827,9 +827,9 @@ const ReportsEngine = {
           <td><strong>${inv.customerName}</strong></td>
           <td><span style="font-family: var(--font-mono); font-weight: 600;">${inv.vehiclePlate}</span></td>
           <td>${inv.serviceName}</td>
-          <td>₹${Number(inv.subtotal || 0).toLocaleString()}</td>
-          <td style="color: #f59e0b;">${inv.discount ? '-₹' + Number(inv.discount).toLocaleString() : '₹0'}</td>
-          <td><strong style="color: #10b981;">₹${Number(inv.totalAmount || 0).toLocaleString()}</strong></td>
+          <td>â‚¹${Number(inv.subtotal || 0).toLocaleString()}</td>
+          <td style="color: #f59e0b;">${inv.discount ? '-â‚¹' + Number(inv.discount).toLocaleString() : 'â‚¹0'}</td>
+          <td><strong style="color: #10b981;">â‚¹${Number(inv.totalAmount || 0).toLocaleString()}</strong></td>
           <td><span class="badge badge-paid">${inv.paymentMethod}</span></td>
           <td><span class="badge ${inv.paymentStatus === 'paid' ? 'badge-paid' : 'badge-unpaid'}">${(inv.invoiceStatus || inv.paymentStatus || 'PAID').toUpperCase()}</span></td>
         </tr>
@@ -857,9 +857,9 @@ const ReportsEngine = {
           <td><span class="badge badge-paid">${s.category}</span></td>
           <td>${s.targetVehicle || 'All Types'}</td>
           <td>${s.duration}</td>
-          <td>₹${Number(s.price || 0).toLocaleString()}</td>
+          <td>â‚¹${Number(s.price || 0).toLocaleString()}</td>
           <td><strong style="font-size: 13px; color: var(--primary-400);">${s.bookingsCount} washes</strong></td>
-          <td><strong style="color: #10b981;">₹${s.totalRevenue.toLocaleString()}</strong></td>
+          <td><strong style="color: #10b981;">â‚¹${s.totalRevenue.toLocaleString()}</strong></td>
         </tr>
       `).join('');
     } else if (this.activeTab === 'staff') {
@@ -886,7 +886,7 @@ const ReportsEngine = {
           <td>${s.phone || 'N/A'}</td>
           <td>${s.assignedBay || 'Bay 1 / Main Area'}</td>
           <td><strong style="font-size: 13px; color: #f59e0b;">${s.completedJobs} jobs</strong></td>
-          <td><strong style="color: #10b981;">₹${s.revenueGenerated.toLocaleString()}</strong></td>
+          <td><strong style="color: #10b981;">â‚¹${s.revenueGenerated.toLocaleString()}</strong></td>
           <td><span class="badge ${s.status === 'Active' ? 'badge-paid' : 'badge-unpaid'}">${s.status || 'Active'}</span></td>
         </tr>
       `).join('');
@@ -1105,7 +1105,7 @@ const ReportsEngine = {
     coords.forEach(pt => {
       dotsSvg += `
         <circle cx="${pt.x}" cy="${pt.y}" r="4.5" fill="#10b981" stroke="var(--bg-surface-elevated, #090d16)" stroke-width="2" style="cursor: pointer;">
-          <title>${pt.day}: ₹${(pt.val * 1000).toLocaleString()}</title>
+          <title>${pt.day}: â‚¹${(pt.val * 1000).toLocaleString()}</title>
         </circle>
       `;
       labelsSvg += `

@@ -1419,3 +1419,500 @@
   color: #60a5fa;
 }
 
+/* ==========================================================================
+   GINGER WASHMATE - FULL SCREEN ADMIN LOGIN PORTAL
+   ========================================================================== */
+
+/* Unauthenticated state visibility */
+html.washmate-unauthenticated #app-root {
+  display: none !important;
+}
+
+html.washmate-unauthenticated #washmate-login-screen {
+  display: flex !important;
+  opacity: 1 !important;
+  pointer-events: all !important;
+}
+
+/* Fullscreen Overlay Container */
+.washmate-login-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: radial-gradient(circle at 50% 18%, #0d233a 0%, #070e1b 45%, #040810 100%);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 24px 16px;
+  box-sizing: border-box;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+}
+
+/* Floating animated background bubbles */
+.login-bg-bubble {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.22) 0%, rgba(37, 99, 235, 0.08) 60%, transparent 100%);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  filter: blur(1px);
+  animation: floatBubble 16s infinite ease-in-out;
+}
+
+.bubble-1 { width: 140px; height: 140px; top: 8%; left: 10%; animation-duration: 18s; animation-delay: 0s; }
+.bubble-2 { width: 90px; height: 90px; top: 65%; left: 8%; animation-duration: 14s; animation-delay: 2s; }
+.bubble-3 { width: 180px; height: 180px; bottom: 10%; right: 10%; animation-duration: 22s; animation-delay: 1s; }
+.bubble-4 { width: 70px; height: 70px; top: 15%; right: 14%; animation-duration: 12s; animation-delay: 3s; }
+.bubble-5 { width: 110px; height: 110px; bottom: 25%; left: 22%; animation-duration: 16s; animation-delay: 4s; }
+.bubble-6 { width: 60px; height: 60px; top: 45%; right: 5%; animation-duration: 10s; animation-delay: 2.5s; }
+
+@keyframes floatBubble {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(-35px) scale(1.08);
+    opacity: 0.35;
+  }
+}
+
+/* Glassmorphism Login Card */
+.washmate-login-card {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 440px;
+  background: rgba(15, 23, 42, 0.84);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75), 0 0 50px rgba(56, 189, 248, 0.12);
+  padding: 34px 30px;
+  box-sizing: border-box;
+  text-align: center;
+  margin: auto;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.washmate-login-card.shake {
+  animation: cardShake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes cardShake {
+  10%, 90% { transform: translate3d(-3px, 0, 0); }
+  20%, 80% { transform: translate3d(5px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
+  40%, 60% { transform: translate3d(6px, 0, 0); }
+}
+
+/* Logo Presentation */
+.login-logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.login-logo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 12px 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 25px rgba(56, 189, 248, 0.25);
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-logo-badge:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5), 0 0 30px rgba(56, 189, 248, 0.35);
+}
+
+.login-logo-img {
+  width: 195px;
+  max-width: 100%;
+  height: auto;
+  max-height: 100px;
+  object-fit: contain;
+  display: block;
+}
+
+.login-portal-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  margin-bottom: 10px;
+}
+
+.login-card-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #f8fafc;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.4px;
+}
+
+.login-card-subtitle {
+  font-size: 13px;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* Error Alert */
+.login-error-alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(239, 68, 68, 0.14);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 12.5px;
+  font-weight: 500;
+  margin-bottom: 18px;
+  text-align: left;
+  line-height: 1.35;
+  animation: fadeInDown 0.3s ease;
+}
+
+.login-error-alert svg {
+  color: #ef4444;
+  flex-shrink: 0;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Demo Credentials Quick-Fill Pill */
+.login-demo-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px dashed rgba(56, 189, 248, 0.35);
+  border-radius: 12px;
+  padding: 8px 14px;
+  margin-bottom: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.login-demo-pill:hover {
+  background: rgba(56, 189, 248, 0.16);
+  border-color: #38bdf8;
+  transform: translateY(-1px);
+}
+
+.demo-pill-text {
+  font-size: 12px;
+  color: #bae6fd;
+}
+
+.demo-pill-text strong {
+  color: #38bdf8;
+}
+
+.demo-pill-action {
+  font-size: 11px;
+  font-weight: 700;
+  background: #0284c7;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+/* Form Styles */
+.login-form-group {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.login-field-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #cbd5e1;
+  margin-bottom: 7px;
+  letter-spacing: 0.2px;
+}
+
+.login-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.login-input-icon {
+  position: absolute;
+  left: 14px;
+  color: #64748b;
+  pointer-events: none;
+  transition: color 0.2s;
+}
+
+.login-text-input {
+  width: 100%;
+  height: 48px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 0 44px 0 42px;
+  color: #f8fafc;
+  font-size: 14.5px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.login-text-input:focus {
+  outline: none;
+  border-color: #38bdf8;
+  background: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+.login-text-input:focus + .login-input-icon,
+.login-input-wrapper:focus-within .login-input-icon {
+  color: #38bdf8;
+}
+
+.login-text-input.input-error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
+}
+
+.login-password-toggle {
+  position: absolute;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: color 0.2s;
+}
+
+.login-password-toggle:hover {
+  color: #e2e8f0;
+}
+
+/* Remember me row */
+.login-remember-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  font-size: 12.5px;
+}
+
+.login-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #94a3b8;
+  user-select: none;
+}
+
+.login-checkbox-label input[type="checkbox"] {
+  accent-color: #0284c7;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.login-secure-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #10b981;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+/* Submit Button */
+.login-btn-submit {
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 8px 20px -4px rgba(2, 132, 199, 0.5), 0 0 15px rgba(37, 99, 235, 0.3);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-btn-submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0369a1 0%, #1d4ed8 100%);
+  box-shadow: 0 12px 26px -4px rgba(2, 132, 199, 0.65), 0 0 25px rgba(56, 189, 248, 0.4);
+  transform: translateY(-1.5px);
+}
+
+.login-btn-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.login-btn-submit:disabled {
+  opacity: 0.85;
+  cursor: not-allowed;
+}
+
+.btn-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Footer note */
+.login-card-footer {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 11.5px;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+.saasgenz-link {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.saasgenz-link:hover {
+  color: #60a5fa;
+  text-decoration: underline;
+}
+
+.app-dashboard-footer {
+  padding: 24px 20px;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 40px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   RESPONSIVENESS FOR LOGIN SCREEN
+   ========================================================================== */
+@media (max-width: 480px) {
+  .washmate-login-overlay {
+    padding: 16px 12px;
+    align-items: flex-start;
+  }
+
+  .washmate-login-card {
+    padding: 24px 18px;
+    border-radius: 18px;
+    margin: 12px auto;
+  }
+
+  .login-logo-badge {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 10px 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .login-logo-img {
+    width: 160px;
+    max-height: 80px;
+  }
+
+  .login-card-title {
+    font-size: 21px;
+  }
+
+  .login-card-subtitle {
+    font-size: 12px;
+  }
+
+  .login-demo-pill {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 10px 12px;
+  }
+
+  .demo-pill-action {
+    align-self: flex-start;
+  }
+
+  .login-remember-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .login-text-input {
+    height: 46px;
+    font-size: 15px; /* avoids iOS safari zoom */
+  }
+
+  .login-btn-submit {
+    height: 48px;
+    font-size: 14.5px;
+  }
+
+  .bubble-1, .bubble-3 {
+    opacity: 0.1;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .washmate-login-card {
+    padding: 28px 24px;
+  }
+}
+
+

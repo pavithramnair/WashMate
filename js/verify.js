@@ -1,5 +1,5 @@
-/**
- * Ginger Carwash Services - Automated Verification Suite
+﻿/**
+ * Ginger WashMate Services - Automated Verification Suite
  * Tests all 12 requirement corrections directly against the running application.
  */
 
@@ -7,7 +7,7 @@ window.GingerVerifier = {
   results: [],
 
   async runAll() {
-    console.log("%c🚀 Starting Ginger Carwash Verification Suite...", "color: #38bdf8; font-weight: bold; font-size: 14px;");
+    console.log("%cðŸš€ Starting Ginger WashMate Verification Suite...", "color: #38bdf8; font-weight: bold; font-size: 14px;");
     this.results = [];
     const app = window.GingerApp;
     if (!app) {
@@ -104,11 +104,11 @@ window.GingerVerifier = {
         title: "4. Multi-Vehicle Individual Services & Offer Pricing",
         test: () => {
           // Assign 3 distinct services:
-          // 1. Land Cruiser -> Premium Wash (₹1,500 with 10% off -> ₹1,350)
+          // 1. Land Cruiser -> Premium Wash (â‚¹1,500 with 10% off -> â‚¹1,350)
           const srvPremium = app.data.services.find(s => s.name.includes("Premium Wash") || s.id === "SRV-PREM" || s.id === "SRV-01");
-          // 2. BMW X5 -> Interior Cleaning (₹900)
+          // 2. BMW X5 -> Interior Cleaning (â‚¹900)
           const srvInterior = app.data.services.find(s => s.name.includes("Interior Cleaning") || s.id === "SRV-INT" || s.id === "SRV-02");
-          // 3. Mercedes GLE -> Full Detailing (₹2,500)
+          // 3. Mercedes GLE -> Full Detailing (â‚¹2,500)
           const srvDetailing = app.data.services.find(s => s.name.includes("Full Detailing") || s.id === "SRV-DET" || s.id === "SRV-04");
 
           if (!srvPremium || !srvInterior || !srvDetailing) {
@@ -126,9 +126,9 @@ window.GingerVerifier = {
           const grandTotalText = document.getElementById('bf-calc-grandtotal')?.textContent || '';
 
           return `Individual services assigned with offer pricing:
-- Land Cruiser: ${srvPremium.name} (Regular ₹${srvPremium.regularPrice}, Offer Price ₹${srvPremium.finalPrice})
-- BMW X5: ${srvInterior.name} (₹${srvInterior.finalPrice})
-- Mercedes GLE: ${srvDetailing.name} (₹${srvDetailing.finalPrice})
+- Land Cruiser: ${srvPremium.name} (Regular â‚¹${srvPremium.regularPrice}, Offer Price â‚¹${srvPremium.finalPrice})
+- BMW X5: ${srvInterior.name} (â‚¹${srvInterior.finalPrice})
+- Mercedes GLE: ${srvDetailing.name} (â‚¹${srvDetailing.finalPrice})
 Totals: Subtotal=${subtotalText}, Discount=${discountText}, Grand Total=${grandTotalText}`;
         }
       },
@@ -227,9 +227,9 @@ Totals: Subtotal=${subtotalText}, Discount=${discountText}, Grand Total=${grandT
 
     const failed = this.results.filter(r => r.status === 'FAIL');
     if (failed.length === 0) {
-      console.log("%c🎉 ALL TESTS PASSED! GINGER CARWASH SERVICES FULLY COMPLIANT.", "color: #059669; font-weight: 800; font-size: 16px;");
+      console.log("%cðŸŽ‰ ALL TESTS PASSED! Ginger WashMate SERVICES FULLY COMPLIANT.", "color: #059669; font-weight: 800; font-size: 16px;");
     } else {
-      console.warn(`%c⚠️ ${failed.length} test(s) failed.`, "color: #ef4444; font-weight: bold;");
+      console.warn(`%câš ï¸ ${failed.length} test(s) failed.`, "color: #ef4444; font-weight: bold;");
     }
 
     this.renderOverlay();
@@ -276,10 +276,10 @@ Totals: Subtotal=${subtotalText}, Discount=${discountText}, Grand Total=${grandT
 
     overlay.innerHTML = `
       <div style="background: ${isAllPass ? '#059669' : '#dc2626'}; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
-        <span>Ginger Carwash - Verification Suite</span>
+        <span>Ginger WashMate - Verification Suite</span>
         <div style="display: flex; align-items: center; gap: 8px;">
           <span style="background: rgba(0,0,0,0.3); padding: 3px 8px; border-radius: 4px; font-size: 12px;">${passed}/${total} PASSED</span>
-          <button onclick="document.getElementById('verifier-overlay').remove()" style="background:none; border:none; color:white; font-size:16px; cursor:pointer;">✕</button>
+          <button onclick="document.getElementById('verifier-overlay').remove()" style="background:none; border:none; color:white; font-size:16px; cursor:pointer;">âœ•</button>
         </div>
       </div>
       <div style="padding: 14px; overflow-y: auto; flex: 1; font-size: 12px; display: flex; flex-direction: column; gap: 8px;">

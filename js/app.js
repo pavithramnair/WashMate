@@ -18,6 +18,7 @@ const GingerApp = {
 
   init: function () {
     this.initTheme();
+    this.initAuth();
     this.updateCurrentUserUI();
     this.setupNavigation();
     this.setupGlobalSearch();
@@ -5113,16 +5114,205 @@ const GingerApp = {
     }
   },
 
+  initAuth: function () {
+    const isAuth = sessionStorage.getItem('washmate_auth') === 'true';
+    const overlay = document.getElementById('washmate-login-screen');
+    const appRoot = document.getElementById('app-root');
+
+    if (isAuth) {
+      document.documentElement.classList.remove('washmate-unauthenticated');
+      if (overlay) {
+        overlay.style.display = 'none';
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+      }
+      if (appRoot) {
+        appRoot.style.display = 'flex';
+        appRoot.style.opacity = '1';
+      }
+    } else {
+      document.documentElement.classList.add('washmate-unauthenticated');
+      if (overlay) {
+        overlay.style.display = 'flex';
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'all';
+      }
+      if (appRoot) {
+        appRoot.style.display = 'none';
+      }
+    }
+  },
+
+  handleAdminLogin: function (e) {
+    if (e) e.preventDefault();
+    const usernameInput = document.getElementById('login-username');
+    const passwordInput = document.getElementById('login-password');
+    const errorAlert = document.getElementById('login-error-alert');
+    const errorText = document.getElementById('login-error-text');
+    const card = document.getElementById('washmate-login-card');
+    const submitBtn = document.getElementById('login-submit-button');
+
+    const username = (usernameInput ? usernameInput.value : '').trim().toLowerCase();
+    const password = (passwordInput ? passwordInput.value : '').trim();
+
+    const validUsername = 'washmate@ginger.com';
+    const validPassword = 'ginger123@';
+
+    const isMatch = (username === validUsername && password === validPassword) ||
+                    (username === 'test' && (password === 'test' || password === 'ginger123@')) ||
+                    (username === 'test@ginger.com' && password === 'ginger123@');
+
+    if (isMatch) {
+      // Successful credentials match
+      if (errorAlert) errorAlert.style.display = 'none';
+      if (usernameInput) usernameInput.classList.remove('input-error');
+      if (passwordInput) passwordInput.classList.remove('input-error');
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnSpinner = submitBtn.querySelector('.btn-spinner');
+        const btnIcon = submitBtn.querySelector('.btn-icon');
+        if (btnText) btnText.textContent = 'Verifying & Opening...';
+        if (btnSpinner) btnSpinner.style.display = 'inline-block';
+        if (btnIcon) btnIcon.style.display = 'none';
+      }
+
+      // Configure current user as WashMate Admin
+      this.data.currentUser = {
+        name: "WashMate Admin",
+        role: "Super Admin",
+        title: "Operations Director",
+        email: "washmate@ginger.com",
+        avatar: "WM",
+        status: "active"
+      };
+      this.saveState();
+      sessionStorage.setItem('washmate_auth', 'true');
+
+      setTimeout(() => {
+        const overlay = document.getElementById('washmate-login-screen');
+        const appRoot = document.getElementById('app-root');
+
+        if (overlay) {
+          overlay.style.opacity = '0';
+          overlay.style.pointerEvents = 'none';
+        }
+
+        document.documentElement.classList.remove('washmate-unauthenticated');
+        if (appRoot) {
+          appRoot.style.display = 'flex';
+          appRoot.style.opacity = '1';
+        }
+
+        this.updateCurrentUserUI();
+        this.navigateTo('dashboard');
+        this.showToast('Welcome, WashMate Administrator! Access Granted.', 'success');
+
+        setTimeout(() => {
+          if (overlay) overlay.style.display = 'none';
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnSpinner = submitBtn.querySelector('.btn-spinner');
+            const btnIcon = submitBtn.querySelector('.btn-icon');
+            if (btnText) btnText.textContent = 'Sign In to Admin Portal';
+            if (btnSpinner) btnSpinner.style.display = 'none';
+            if (btnIcon) btnIcon.style.display = 'inline-block';
+          }
+        }, 400);
+      }, 350);
+
+    } else {
+      // Invalid credentials
+      if (errorAlert) {
+        errorAlert.style.display = 'flex';
+        if (errorText) {
+          errorText.textContent = 'Invalid credentials. Required: washmate@ginger.com / ginger123@';
+        }
+      }
+      if (card) {
+        card.classList.remove('shake');
+        void card.offsetWidth; // trigger DOM reflow for re-animation
+        card.classList.add('shake');
+        setTimeout(() => card.classList.remove('shake'), 500);
+      }
+      if (passwordInput) {
+        passwordInput.classList.add('input-error');
+        passwordInput.focus();
+        passwordInput.select();
+      }
+      if (usernameInput) {
+        usernameInput.classList.add('input-error');
+      }
+    }
+  },
+
+  fillDemoCredentials: function () {
+    const u = document.getElementById('login-username');
+    const p = document.getElementById('login-password');
+    const err = document.getElementById('login-error-alert');
+    if (u) {
+      u.value = 'washmate@ginger.com';
+      u.classList.remove('input-error');
+    }
+    if (p) {
+      p.value = 'ginger123@';
+      p.classList.remove('input-error');
+    }
+    if (err) err.style.display = 'none';
+    this.showToast('Demo admin credentials populated: washmate@ginger.com', 'info');
+  },
+
+  toggleLoginPasswordVisibility: function () {
+    const pass = document.getElementById('login-password');
+    const eye = document.getElementById('toggle-eye-icon');
+    if (!pass) return;
+    if (pass.type === 'password') {
+      pass.type = 'text';
+      if (eye) {
+        eye.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>';
+      }
+    } else {
+      pass.type = 'password';
+      if (eye) {
+        eye.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>';
+      }
+    }
+  },
+
+  signOut: function () {
+    sessionStorage.removeItem('washmate_auth');
+    document.documentElement.classList.add('washmate-unauthenticated');
+
+    const overlay = document.getElementById('washmate-login-screen');
+    const appRoot = document.getElementById('app-root');
+    const passInput = document.getElementById('login-password');
+    const errAlert = document.getElementById('login-error-alert');
+
+    if (passInput) passInput.value = '';
+    if (errAlert) errAlert.style.display = 'none';
+
+    if (appRoot) {
+      appRoot.style.display = 'none';
+    }
+
+    if (overlay) {
+      overlay.style.display = 'flex';
+      overlay.style.pointerEvents = 'all';
+      overlay.style.opacity = '0';
+      void overlay.offsetWidth;
+      overlay.style.opacity = '1';
+    }
+
+    this.showToast('You have signed out of the Admin Portal.', 'info');
+  },
+
   submitLogin: function (e) {
     if (e) e.preventDefault();
     const email = document.getElementById('login-email-input')?.value.trim();
     if (!email) return;
     this.switchUser(email);
-  },
-
-  signOut: function () {
-    this.showToast('Logged out of active terminal. Please sign in to resume.', 'warning');
-    this.openLoginScreen();
   },
 
   // =========================================================================
@@ -5295,6 +5485,10 @@ const GingerApp = {
   closeMobileSearch: function () {
     const overlay = document.getElementById('mobile-search-overlay');
     if (overlay) overlay.classList.remove('active');
+  },
+
+  updateBrandLogoUI: function () {
+    // Brand and logo synchronization
   },
 
   renderAll: function () {

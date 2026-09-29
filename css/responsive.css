@@ -729,6 +729,7 @@
    PRINT OVERRIDES - Hide mobile UI elements
    ========================================================================== */
 @media print {
+
   .sidebar,
   .topbar,
   .filter-toolbar,

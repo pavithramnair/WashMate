@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Ginger WashMate - Initial Mock Database & LocalStorage State Engine
  */
 
@@ -1692,6 +1692,15 @@ const DEFAULT_DATA = {
   ],
 
   users: [
+    {
+      id: "USR-000",
+      name: "WashMate Administrator",
+      email: "washmate@ginger.com",
+      role: "Super Admin",
+      phone: "+91 98200 12345",
+      status: "Active",
+      lastLogin: "Just now"
+    },
     {
       id: "USR-001",
       name: "Rashid Al-Kuwari",
