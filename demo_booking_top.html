@@ -1,0 +1,2736 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ginger Carwash Services - Professional Car Wash & Detailing Management Platform</title>
+  <meta name="description" content="Production-grade SaaS Car Wash & Detailing Operations System for Ginger Carwash Services. Manage packages, bookings, 11-stage workflow, customers, vehicles, inventory, staff, and billing.">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/print.css" media="print">
+</head>
+<body data-theme="dark">
+  <div id="app-root">
+
+    <!-- =====================================================================
+         SIDEBAR NAVIGATION
+         ===================================================================== -->
+    <aside class="sidebar" id="main-sidebar">
+      <div class="sidebar-header">
+        <a href="#" class="brand-wrapper" onclick="GingerApp.navigateTo('dashboard'); return false;">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path>
+              <circle cx="7" cy="17" r="2"></circle>
+              <path d="M9 17h6"></path>
+              <circle cx="17" cy="17" r="2"></circle>
+            </svg>
+          </div>
+          <div class="brand-info">
+            <span class="brand-name">Ginger <span class="brand-badge">CARWASH</span></span>
+            <span class="brand-branch"><span class="branch-dot"></span> Central Auto Care</span>
+          </div>
+        </a>
+        <button class="sidebar-collapse-btn" id="sidebar-toggle-btn" title="Toggle Sidebar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav-container custom-scroll">
+        <div class="nav-section-title">Core Operations</div>
+        
+        <a href="#dashboard" class="nav-item active" data-module="dashboard">
+          <span class="nav-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+          </span>
+          <span class="nav-item-label">Dashboard</span>
+        </a>
+
+        <a href="#bookings" class="nav-item" data-module="bookings">
+          <span class="nav-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </span>
+          <span class="nav-item-label">Bookings</span>
+          <span class="nav-item-badge">7 Active</span>
+        </a>
+
+
+        <!-- DEDICATED PACKAGES MODULE -->
+        <a href="#packages" class="nav-item" data-module="packages">
+          <span class="nav-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </span>
+          <span class="nav-item-label">Packages</span>
+          <span class="nav-item-badge" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa;">9 Bundles</span>
+        </a>
+
+        <a href="#services" class="nav-item" data-module="services">
+          <span class="nav-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          </span>
+          <span class="nav-item-label">Single Services</span>
+        </a>
+
+        <a href="#customers" class="nav-item" data-module="customers">
+          <span class="nav-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </span>
+          <span class="nav-item-label">Customers</span>
+        </a>
+
+        <a href="#vehicles" class="nav-item" data-module="vehicles">
+          <span class="nav-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+          </span>
+          <span class="nav-item-label">Vehicles</span>
+        </a>
+
+        <div class="nav-section-title">Fleet & Logistics</div>
+
+        <a href="#staff" class="nav-item" data-module="staff">
+          <span class="nav-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          </span>
+          <span class="nav-item-label">Staff Management</span>
+        </a>
+
+        <a href="#billing" class="nav-item" data-module="billing">
+          <span class="nav-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </span>
+          <span class="nav-item-label">Billing & Invoices</span>
+        </a>
+
+        <a href="#inventory" class="nav-item" data-module="inventory">
+          <span class="nav-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </span>
+          <span class="nav-item-label">Inventory & Stock</span>
+          <span class="nav-item-badge" style="color: #f87171; border-color: rgba(239, 68, 68, 0.3);">3 Low</span>
+        </a>
+
+        <div class="nav-section-title">Administration</div>
+
+        <a href="#notifications" class="nav-item" data-module="notifications">
+          <span class="nav-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </span>
+          <span class="nav-item-label">Notifications</span>
+        </a>
+
+        <a href="#reports" class="nav-item" data-module="reports">
+          <span class="nav-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </span>
+          <span class="nav-item-label">Reports & Analytics</span>
+        </a>
+
+        <a href="#roles" class="nav-item" data-module="roles">
+          <span class="nav-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </span>
+          <span class="nav-item-label">Users & Roles</span>
+        </a>
+
+        <a href="#settings" class="nav-item" data-module="settings">
+          <span class="nav-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </span>
+          <span class="nav-item-label">System Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-widget" id="sidebar-user-card" onclick="GingerApp.openLoginScreen()" title="Click to Switch Account / Terminal Authorization">
+          <div class="user-avatar-wrap">
+            <div class="user-avatar-img" id="sidebar-user-avatar">RK</div>
+            <div class="user-online-badge"></div>
+          </div>
+          <div class="user-info">
+            <span class="user-name" id="sidebar-user-name">Rashid Al-Kuwari</span>
+            <span class="user-role" id="sidebar-user-role">Operations Director</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- =====================================================================
+         MAIN VIEWPORT WRAPPER
+         ===================================================================== -->
+    <div class="main-wrapper">
+      
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <nav class="page-breadcrumb">
+            <a href="#" onclick="GingerApp.navigateTo('dashboard'); return false;">Ginger Carwash Services</a>
+            <span class="page-breadcrumb-separator">/</span>
+            <span class="page-breadcrumb-current" id="topbar-breadcrumb-current">Operational Dashboard</span>
+          </nav>
+
+          <div class="live-status-pill">
+            <span class="live-pulse"></span>
+            <span>System Operational</span>
+          </div>
+        </div>
+
+        <div class="topbar-center">
+          <div class="global-search-container">
+            <svg class="global-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" class="global-search-input" placeholder="Search packages, customers, plates (e.g. QTR 45821), bookings, invoices...">
+            <span class="global-search-shortcut">Ctrl+K</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- LIGHT / DARK MODE TOGGLE BUTTON -->
+          <button class="topbar-action-btn" id="theme-toggle-btn" onclick="GingerApp.toggleTheme()" title="Toggle Light / Dark Mode">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+
+          <!-- Notification Bell -->
+          <div style="position: relative;">
+            <button class="topbar-action-btn" id="topbar-notif-btn" title="System Notifications">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+              </svg>
+              <span class="badge-counter" id="topbar-notif-count">2</span>
+            </button>
+            <div class="popover-menu" id="topbar-notif-dropdown" style="width: 320px;">
+              <div style="padding: 8px 12px; font-weight: 700; font-size: 13px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                <span>Notifications</span>
+                <a href="#" style="font-size: 11px; color: var(--primary-500); text-decoration: none;" onclick="GingerApp.navigateTo('notifications'); return false;">View All</a>
+              </div>
+              <div id="topbar-notif-list" style="padding: 6px;"></div>
+            </div>
+          </div>
+
+          <!-- Quick Action Dropdown -->
+          <div class="quick-action-dropdown-wrap">
+            <button class="btn-primary" id="btn-quick-action">
+              <span>+ Quick Action</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="popover-menu" id="quick-action-menu">
+              <div class="popover-item" onclick="GingerApp.openModal('add-booking-modal')">
+                <span>ðŸ“…</span> <span>New Service Booking</span>
+              </div>
+              <div class="popover-item" onclick="GingerApp.openCreatePackageModal()">
+                <span>ðŸ“¦</span> <span>Create Package Bundle</span>
+              </div>
+              <div class="popover-item" onclick="GingerApp.openCreateCustomerModal()">
+                <span>ðŸ‘¤</span> <span>Register Customer</span>
+              </div>
+              <div class="popover-item" onclick="GingerApp.openCreateVehicleModal()">
+                <span>ðŸš—</span> <span>Add Vehicle to Registry</span>
+              </div>
+              <div class="popover-item" onclick="GingerApp.openCreateServiceModal()">
+                <span>âœ¨</span> <span>Add Wash Service</span>
+              </div>
+              <div class="popover-item" onclick="GingerApp.openCreateStaffModal()">
+                <span>ðŸ› </span> <span>Add Staff Member</span>
+              </div>
+              <div class="popover-divider"></div>
+              <div class="popover-item" onclick="GingerApp.openCreateProductModal()">
+                <span>ðŸ“¦</span> <span>Add Inventory Product</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- User Widget -->
+          <div class="user-avatar-wrap" id="topbar-user-widget" style="cursor: pointer;" title="User Profile">
+            <div class="user-avatar-img">RK</div>
+            <div class="user-online-badge"></div>
+          </div>
+          <div class="popover-menu" id="user-profile-menu">
+            <div style="padding: 10px 12px; border-bottom: 1px solid var(--border-subtle);">
+              <div style="font-weight: 700; color: var(--text-primary);" id="topbar-user-name">Rashid Al-Kuwari</div>
+              <div style="font-size: 11.5px; color: var(--text-tertiary);" id="topbar-user-role">Super Admin (Operations)</div>
+            </div>
+            <div class="popover-item" onclick="GingerApp.openLoginScreen()">
+              <span>ðŸ”</span> <span>Switch Account / Terminal Login</span>
+            </div>
+            <div class="popover-item" onclick="GingerApp.navigateTo('settings')">
+              <span>âš™</span> <span>Business & System Settings</span>
+            </div>
+            <div class="popover-item" onclick="GingerApp.toggleTheme()">
+              <span>ðŸŒ“</span> <span>Toggle Dark / Light Mode</span>
+            </div>
+            <div class="popover-item" onclick="GingerVerifier.runAll()">
+              <span>ðŸ§ª</span> <span>Run System Verification Suite</span>
+            </div>
+            <div class="popover-divider"></div>
+            <div class="popover-item" style="color: var(--danger);" onclick="GingerApp.signOut()">
+              <span>ðŸšª</span> <span>Sign Out to Login Screen</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- PAGE CONTENT AREA -->
+      <main class="page-content-area custom-scroll">
+
+        <!-- ===================================================================
+             1. DASHBOARD PAGE
+             =================================================================== -->
+        <section id="page-dashboard" class="page-module active-module">
+          <div class="module-header">
+            <div class="module-title-group">
+              <h1>Operational Dashboard</h1>
+              <p>Ginger Carwash Services live service volume, customer bookings, staff schedules, and revenue.</p>
+            </div>
+            <div class="module-actions">
+              <button class="btn-secondary" onclick="ReportsEngine.exportToCsv('bookings')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Export CSV
+              </button>
+              <button class="btn-primary" onclick="GingerApp.openModal('add-booking-modal')">
+                + New Service Booking
+              </button>
+            </div>
+          </div>
+
+          <!-- KPI Grid -->
+          <div class="kpi-grid">
+            <div class="kpi-card accent-primary">
+              <div class="kpi-top">
+                <span class="kpi-label">Total Bookings</span>
+                <div class="kpi-icon-wrap">ðŸ“…</div>
+              </div>
+              <div class="kpi-value" id="kpi-total-bookings">7</div>
+              <div class="kpi-trend trend-up">
+                <span>â†‘ +18.4%</span>
+                <span style="color: var(--text-tertiary);">vs last week</span>
+              </div>
+            </div>
+
+            <div class="kpi-card accent-cyan">
+              <div class="kpi-top">
+                <span class="kpi-label">Today's Bookings</span>
+                <div class="kpi-icon-wrap">ðŸš—</div>
+              </div>
+              <div class="kpi-value" id="kpi-today-bookings">7</div>
+              <div class="kpi-trend trend-up">
+                <span>â†‘ 4 new today</span>
+                <span style="color: var(--text-tertiary);">on schedule</span>
+              </div>
+            </div>
+
+            <div class="kpi-card accent-success">
+              <div class="kpi-top">
+                <span class="kpi-label">Completed Washes</span>
+                <div class="kpi-icon-wrap">âœ“</div>
+              </div>
+              <div class="kpi-value" id="kpi-completed-services">2</div>
+              <div class="kpi-trend trend-up">
+                <span>99.2%</span>
+                <span style="color: var(--text-tertiary);">on-time rate</span>
+              </div>
+            </div>
+
+            <div class="kpi-card accent-warning">
+              <div class="kpi-top">
+                <span class="kpi-label">Active Services</span>
+                <div class="kpi-icon-wrap">â±</div>
+              </div>
+              <div class="kpi-value" id="kpi-pending-services">5</div>
+              <div class="kpi-trend trend-neutral">
+                <span>Services currently in progress</span>
+              </div>
+            </div>
+
+            <div class="kpi-card accent-purple">
+              <div class="kpi-top">
+                <span class="kpi-label">Registered Customers</span>
+                <div class="kpi-icon-wrap">ðŸ‘¥</div>
+              </div>
+              <div class="kpi-value" id="kpi-total-customers">6</div>
+              <div class="kpi-trend trend-up">
+                <span>2 VIP accounts</span>
+              </div>
+            </div>
+
+            <div class="kpi-card accent-success">
+              <div class="kpi-top">
+                <span class="kpi-label">Today's Revenue</span>
+                <div class="kpi-icon-wrap">â‚¹</div>
+              </div>
+              <div class="kpi-value" id="kpi-total-revenue">â‚¹ 10,443</div>
+              <div class="kpi-trend trend-up">
+                <span>â†‘ +12.5%</span>
+                <span style="color: var(--text-tertiary);">vs yesterday</span>
+              </div>
+            </div>
+
+            <div class="kpi-card accent-warning">
+              <div class="kpi-top">
+                <span class="kpi-label">Pending Payments</span>
+                <div class="kpi-icon-wrap">ðŸ’³</div>
+              </div>
+              <div class="kpi-value" id="kpi-pending-payments">â‚¹ 767</div>
+              <div class="kpi-trend trend-neutral">
+                <span>1 invoice pending</span>
+              </div>
+            </div>
+
+            <div class="kpi-card accent-danger">
+              <div class="kpi-top">
+                <span class="kpi-label">Low Stock Alerts</span>
+                <div class="kpi-icon-wrap">âš </div>
+              </div>
+              <div class="kpi-value" id="kpi-low-stock" style="color: #f87171;">3</div>
+              <div class="kpi-trend trend-down">
+                <span>Items need reorder</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Status Overview (Workflow Lifecycle) -->
+          <div class="service-status-bar" style="background: var(--bg-surface-elevated); border: 1px solid var(--border-medium); border-radius: var(--radius-lg); padding: 18px 20px;">
+            <div class="service-status-header" style="margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;">
+              <div class="service-status-title" style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px; color: var(--text-primary);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span>Today's Service Workflow & Booking Statuses</span>
+              </div>
+              <button class="btn-secondary btn-sm" onclick="GingerApp.navigateTo('bookings')">
+                View All Bookings â†’
+              </button>
+            </div>
+            <div class="status-summary-pills-grid" id="dashboard-status-summary-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px;">
+              <!-- Rendered via JS: Confirmed, Checked In, In Service, Quality Check, Ready for Pickup, Completed -->
+            </div>
+          </div>
+
+          <!-- Charts Grid -->
+          <div class="charts-grid-2">
+            <div class="chart-card">
+              <div class="chart-header">
+                <div class="chart-title">Booking Overview by Day</div>
+                <div class="chart-legend">
+                  <div class="legend-item"><span class="legend-color" style="background: #2563eb;"></span> Completed</div>
+                  <div class="legend-item"><span class="legend-color" style="background: #f59e0b;"></span> In Service</div>
+                </div>
+              </div>
+              <div class="svg-chart-container" id="chart-bookings-overview-svg"></div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-header">
+                <div class="chart-title">Revenue Trajectory (â‚¹)</div>
+                <div class="chart-legend">
+                  <div class="legend-item"><span class="legend-color" style="background: #10b981;"></span> Daily Gross</div>
+                </div>
+              </div>
+              <div class="svg-chart-container" id="chart-revenue-overview-svg"></div>
+            </div>
+          </div>
+
+          <!-- Today's Appointments Table -->
+          <div class="table-card" style="margin-bottom: 24px;">
+            <div class="modal-header" style="border-bottom: 1px solid var(--border-subtle); background: transparent;">
+              <div class="modal-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>Today's Service Appointments</span>
+              </div>
+              <button class="btn-secondary btn-sm" onclick="GingerApp.navigateTo('bookings')">View All Bookings â†’</button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Booking ID</th>
+                    <th>Customer</th>
+                    <th>Vehicle</th>
+                    <th>Service / Package</th>
+                    <th>Staff Assigned</th>
+                    <th>Appt Time</th>
+                    <th>Status</th>
+                    <th>Payment</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-today-table-body">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Low Stock Alert Box -->
+          <div class="table-card">
+            <div class="modal-header" style="border-bottom: 1px solid var(--border-subtle); background: transparent;">
+              <div class="modal-title" style="color: #f87171;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span>Low Consumables & Chemical Alerts</span>
+              </div>
+              <button class="btn-secondary btn-sm" onclick="GingerApp.navigateTo('inventory')">Manage Stock â†’</button>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Chemical / Consumable Product</th>
+                    <th>Current Stock</th>
+                    <th>Minimum Safety Level</th>
+                    <th>Preferred Supplier</th>
+                    <th>Alert Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-low-stock-body">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             2. BOOKINGS & APPOINTMENTS PAGE
+             =================================================================== -->
+        <section id="page-bookings" class="page-module">
+          <div class="module-header">
+            <div class="module-title-group">
+              <h1>Bookings & Appointments</h1>
+              <p>Manage, schedule, filter, and track all service jobs from intake to collection.</p>
+            </div>
+            <div class="module-actions">
+              <button class="btn-secondary" onclick="ReportsEngine.exportToCsv('bookings')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Export CSV
+              </button>
+              <button class="btn-primary" onclick="GingerApp.openModal('add-booking-modal')">
+                + New Service Booking
+              </button>
+            </div>
+          </div>
+
+          <!-- Filter Toolbar -->
+          <div class="filter-toolbar">
+            <div class="filter-group-left">
+              <div class="filter-search-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="filter-bookings-search" placeholder="Search by booking, customer, plate..." oninput="GingerApp.filters.bookings.search = this.value; GingerApp.renderBookingsTable();">
+              </div>
+
+              <select class="filter-select" id="filter-bookings-status" onchange="GingerApp.filters.bookings.status = this.value; GingerApp.renderBookingsTable();">
+                <option value="all">All Service Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Checked In">Checked In</option>
+                <option value="In Service">In Service</option>
+                <option value="Quality Check">Quality Check</option>
+                <option value="Ready for Pickup">Ready for Pickup</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+
+              <select class="filter-select" id="filter-bookings-payment" onchange="GingerApp.filters.bookings.payment = this.value; GingerApp.renderBookingsTable();">
+                <option value="all">All Payment Statuses</option>
+                <option value="Paid">Paid</option>
+                <option value="Pending">Payment Pending</option>
+              </select>
+
+              <button class="btn-secondary btn-sm" onclick="GingerApp.resetBookingFilters()">Reset Filters</button>
+            </div>
+
+            <div class="filter-group-right">
+              <button class="btn-secondary btn-sm" onclick="ReportsEngine.exportToCsv('bookings')">
+                Export Bookings CSV
+              </button>
+            </div>
+          </div>
+
+          <!-- Bookings Table -->
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th class="sortable">Booking ID</th>
+                    <th class="sortable">Date</th>
+                    <th>Time</th>
+                    <th>Customer</th>
+                    <th>Vehicle</th>
+                    <th>Plate Number</th>
+                    <th>Package / Service</th>
+                    <th>Assigned Staff</th>
+                    <th>Amount</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="bookings-table-body">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+            <div class="table-footer">
+              <span id="bookings-count-label">Showing bookings</span>
+              <div class="pagination-controls">
+                <button class="pagination-btn" disabled>Â« Previous</button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn" disabled>Next Â»</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ===================================================================
+             4. DEDICATED PACKAGES MODULE
+             =================================================================== -->
+        <section id="page-packages" class="page-module">
+          <div class="module-header">
+            <div class="module-title-group">
+              <h1>Car Wash Packages & Detailing Bundles</h1>
+              <p>Design, configure, and manage comprehensive car wash packages tailored for different vehicle classes.</p>
+            </div>
+            <div class="module-actions">
+              <button class="btn-secondary" onclick="ReportsEngine.exportToCsv('packages')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Export CSV
+              </button>
+              <button class="btn-primary" onclick="GingerApp.openCreatePackageModal()">
+                + Create New Package
+              </button>
+            </div>
+          </div>
+
+          <!-- Filter Toolbar for Packages -->
+          <div class="filter-toolbar">
+            <div class="filter-group-left">
+              <div class="filter-search-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="filter-packages-search" placeholder="Search package name, type, description..." oninput="GingerApp.filters.packages.search = this.value; GingerApp.renderPackagesTable();">
+              </div>
+
+              <select class="filter-select" id="filter-packages-type" onchange="GingerApp.filters.packages.type = this.value; GingerApp.renderPackagesTable();">
+                <option value="all">All Package Categories</option>
+                <option value="Basic Wash">Basic Wash</option>
+                <option value="Standard Wash">Standard Wash</option>
+                <option value="Premium Wash">Premium Wash</option>
+                <option value="Interior Cleaning">Interior Cleaning</option>
+                <option value="Exterior Cleaning">Exterior Cleaning</option>
+                <option value="Full Car Detailing">Full Car Detailing</option>
+                <option value="Express Wash">Express Wash</option>
+                <option value="Deep Cleaning">Deep Cleaning</option>
+                <option value="SUV / Large Vehicle Packages">SUV / Large Vehicle Packages</option>
+              </select>
+
+              <select class="filter-select" id="filter-packages-vehicle" onchange="GingerApp.filters.packages.vehicle = this.value; GingerApp.renderPackagesTable();">
+                <option value="all">All Vehicle Types</option>
+                <option value="All Types">All Types</option>
+                <option value="Sedan">Sedan / Hatchback</option>
+                <option value="SUV">SUV / Large</option>
+              </select>
+
+              <select class="filter-select" id="filter-packages-status" onchange="GingerApp.filters.packages.status = this.value; GingerApp.renderPackagesTable();">
+                <option value="all">All Statuses</option>
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+
+              <select class="filter-select" id="filter-packages-price" onchange="GingerApp.filters.packages.priceRange = this.value; GingerApp.renderPackagesTable();">
+                <option value="all">All Price Ranges</option>
+                <option value="under-1500">Under â‚¹1,500</option>
+                <option value="1500-3000">â‚¹1,500 - â‚¹3,000</option>
+                <option value="3000-6000">â‚¹3,000 - â‚¹6,000</option>
+                <option value="above-6000">Above â‚¹6,000</option>
+              </select>
+
+              <button class="btn-secondary btn-sm" onclick="GingerApp.resetPackageFilters()">Reset Filters</button>
+            </div>
+          </div>
+
+          <!-- Packages Table -->
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Package Name</th>
+                    <th>Category / Type</th>
+                    <th>Vehicle Type</th>
+                    <th>Included Services</th>
+                    <th>Duration</th>
+                    <th>Pricing (Pkg / Reg)</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="packages-table-body">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+            <div class="table-footer">
+              <span id="packages-count-label">Showing packages</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             5. SINGLE SERVICES MODULE
+             =================================================================== -->
+        <section id="page-services" class="page-module">
+          <div class="module-header">
+            <div class="module-title-group">
+              <h1>Individual Wash & Detailing Services</h1>
+              <p>Manage standalone detailing treatments, duration, and baseline pricing.</p>
+            </div>
+            <div class="module-actions">
+              <button class="btn-primary" onclick="GingerApp.openCreateServiceModal()">+ Add New Service</button>
+            </div>
+          </div>
+
+          <div class="services-catalog-grid" id="services-grid-container">
+            <!-- Populated via JS -->
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             6. CUSTOMERS MODULE
+             =================================================================== -->
+        <section id="page-customers" class="page-module">
+          <div class="module-header">
+            <div class="module-title-group">
+              <h1>Customer Directory</h1>
+              <p>Customer profiles, service history, owned vehicles, and lifetime spending.</p>
+            </div>
+            <div class="module-actions">
+              <button class="btn-secondary" onclick="ReportsEngine.exportToCsv('customers')">Export CSV</button>
+              <button class="btn-primary" onclick="GingerApp.openCreateCustomerModal()">+ Register Customer</button>
+            </div>
+          </div>
+
+          <div class="filter-toolbar">
+            <div class="filter-group-left">
+              <div class="filter-search-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" placeholder="Search customer by name, phone, email..." oninput="GingerApp.filters.customers.search = this.value; GingerApp.renderCustomersTable();">
+              </div>
+              <select class="filter-select" onchange="GingerApp.filters.customers.status = this.value; GingerApp.renderCustomersTable();">
+                <option value="all">All Customer Tiers</option>
+                <option value="VIP">VIP</option>
+                <option value="Active">Standard Active</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Customer ID</th>
+                    <th>Full Name</th>
+                    <th>Phone Number</th>
+                    <th>Email Address</th>
+                    <th>Vehicles</th>
+                    <th>Total Bookings</th>
+                    <th>Last Visit</th>
+                    <th>Lifetime Spend</th>
+                    <th>Tier Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="customers-table-body">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+            <div class="table-footer">
+              <span id="customers-count-label">Showing customers</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             7. VEHICLES MODULE
+             =================================================================== -->
+        <section id="page-vehicles" class="page-module">
+          <div class="module-header">
+            <div class="module-title-group">
+              <h1>Vehicle Registry & Inspection Log</h1>
+              <p>Vehicle details, license plates, condition records, and before/after photo records.</p>
+            </div>
+            <div class="module-actions">
+              <button class="btn-primary" onclick="GingerApp.openCreateVehicleModal()">+ Register Vehicle</button>
+            </div>
+          </div>
+
+          <div class="filter-toolbar">
+            <div class="filter-group-left">
+              <div class="filter-search-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" placeholder="Search plate, model, owner..." oninput="GingerApp.filters.vehicles.search = this.value; GingerApp.renderVehiclesTable();">
+              </div>
+              <select class="filter-select" onchange="GingerApp.filters.vehicles.type = this.value; GingerApp.renderVehiclesTable();">
+                <option value="all">All Vehicle Types</option>
+                <option value="SUV">SUV</option>
+                <option value="Sedan">Sedan</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Registration Plate</th>
+                    <th>Make & Model</th>
+                    <th>Year</th>
+                    <th>Vehicle Type</th>
+                    <th>Registered Owner</th>
+                    <th>Total Services</th>
+                    <th>Last Service Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="vehicles-table-body">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             8. STAFF MANAGEMENT MODULE
+             =================================================================== -->
+        <section id="page-staff" class="page-module">
+          <div class="module-header">
+            <div class="module-title-group">
+              <h1>Staff & Technician Roster</h1>
+              <p>Lead detailers, quality inspectors, service specialists, and shift schedules.</p>
+            </div>
+            <div class="module-actions">
+              <button class="btn-primary" onclick="GingerApp.openCreateStaffModal()">+ Add Staff Member</button>
+            </div>
+          </div>
+
+          <div class="kpi-grid" id="staff-grid-container">
+            <!-- Populated via JS -->
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             9. BILLING & INVOICES MODULE
+             =================================================================== -->
+        <section id="page-billing" class="page-module">
+          <div class="module-header">
+            <div class="module-title-group">
+              <h1>Billing & Payment Records</h1>
+              <p>Issue professional invoices, edit line items, record payments, and inspect audit histories.</p>
+            </div>
+            <div class="module-actions">
+              <button class="btn-secondary" onclick="ReportsEngine.exportToCsv('billing')">Export Invoices CSV</button>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Invoice #</th>
+                    <th>Booking Ref</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Grand Total</th>
+                    <th>Payment Method</th>
+                    <th>Invoice Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="billing-table-body">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             10. INVENTORY MANAGEMENT MODULE
+             =================================================================== -->
+        <section id="page-inventory" class="page-module">
+          <div class="module-header">
+            <div class="module-title-group">
+              <h1>Inventory & Consumables</h1>
+              <p>Monitor shampoos, ceramic bottles, microfiber towels, and purchase reorders.</p>
+            </div>
+            <div class="module-actions">
+              <button class="btn-secondary" onclick="ReportsEngine.exportToCsv('inventory')">Export CSV</button>
+              <button class="btn-secondary" onclick="GingerApp.openCreateSupplierModal()">+ Add Supplier</button>
+              <button class="btn-primary" onclick="GingerApp.openCreateProductModal()">+ Add Product</button>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>SKU Code</th>
+                    <th>Current Stock</th>
+                    <th>Min Threshold</th>
+                    <th>Primary Supplier</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="inventory-table-body">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             11. NOTIFICATIONS MODULE
+             =================================================================== -->
+        <section id="page-notifications" class="page-module">
+          <div class="module-header">
+            <div class="module-title-group">
+              <h1>Notification Center & SMS Simulator</h1>
+              <p>Automated WhatsApp & SMS customer alerts, service readiness triggers, and low stock warnings.</p>
+            </div>
+            <div class="module-actions">
+              <button class="btn-secondary" onclick="GingerApp.data.notifications.forEach(n=>n.read=true); GingerApp.updateNotificationCounter(); GingerApp.renderNotificationsModule(); GingerApp.showToast('All notifications marked as read', 'success');">
+                Mark All as Read
+              </button>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; align-items: start;">
+            <div class="table-card" style="padding: 16px;">
+              <h3 style="font-size: 14px; margin-bottom: 14px; color: var(--text-primary);">Automated System Broadcasts</h3>
+              <div id="notifications-full-list">
+                <!-- Populated via JS -->
+              </div>
+            </div>
+
+            <!-- WhatsApp & SMS Mobile Preview Simulator -->
+            <div class="phone-preview-mockup">
+              <div class="phone-header">
+                <span class="user-avatar-wrap" style="width: 28px; height: 28px; font-size: 10px;">
+                  <div class="user-avatar-img">GC</div>
+                </span>
+                <div>
+                  <div style="font-size: 12px; color: white;">Ginger Carwash Services</div>
+                  <div style="font-size: 10px; color: #8696a0;">Business Account â€¢ Verified</div>
+                </div>
+              </div>
+              <div style="flex: 1; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px;">
+                <div class="phone-message-bubble">
+                  ðŸš— <strong>Ginger Carwash Update</strong><br>
+                  Dear Sarah Jenkins, your BMW 530i M Sport (AUH 19420) service has passed our 100-point Quality Check and is ready for pickup at Central Detailing Center!<br><br>
+                  View invoice & warranty: <span style="text-decoration: underline; color: #53bdeb;">https://gingercarwash.com/inv-392</span>
+                  <div class="message-time-meta">11:20 AM âœ“âœ“</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             12. REPORTS & ANALYTICS MODULE
+             =================================================================== -->
+        <section id="page-reports" class="page-module">
+          <div class="module-header">
+            <div class="module-title-group">
+              <h1>Reports & Performance Analytics</h1>
+              <p>Operational volume trends, revenue attribution, operational capacity, and staff performance.</p>
+            </div>
+            <div class="module-actions">
+              <button class="btn-secondary" onclick="ReportsEngine.exportToCsv('packages')">Export Packages CSV</button>
+              <button class="btn-secondary" onclick="ReportsEngine.exportToCsv('bookings')">Export Booking Data</button>
+              <button class="btn-primary" onclick="ReportsEngine.exportToCsv('billing')">Export Financials CSV</button>
+            </div>
+          </div>
+
+          <div class="charts-grid-2">
+            <div class="chart-card">
+              <div class="chart-header">
+                <div class="chart-title">Weekly Wash Throughput (Volume)</div>
+              </div>
+              <div class="svg-chart-container" id="reports-booking-chart-svg"></div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-header">
+                <div class="chart-title">Revenue Trajectory Breakdown</div>
+              </div>
+              <div class="svg-chart-container" id="reports-revenue-chart-svg"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             13. USERS & ROLES PERMISSION MATRIX
+             =================================================================== -->
+        <section id="page-roles" class="page-module">
+          <div class="module-header">
+            <div class="module-title-group">
+              <h1>Role-Based Access Control (RBAC)</h1>
+              <p>Define operational privileges and invoice editing permissions across roles.</p>
+            </div>
+            <div class="module-actions">
+              <button class="btn-secondary" onclick="GingerApp.openCreateRoleModal()">+ Create Role</button>
+              <button class="btn-primary" onclick="GingerApp.openCreateUserModal()">+ Add User Account</button>
+            </div>
+          </div>
+
+          <!-- Active User Session Banner -->
+          <div style="background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 16px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <div class="user-avatar-wrap" style="width: 48px; height: 48px; font-size: 16px;">
+                <div class="user-avatar-img" id="rbac-current-avatar">RK</div>
+              </div>
+              <div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <strong style="font-size: 15px; color: var(--text-primary);" id="rbac-current-name">Rashid Al-Kuwari</strong>
+                  <span class="badge badge-paid" id="rbac-current-role">Super Admin</span>
+                </div>
+                <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">
+                  Current Active Session â€¢ <span id="rbac-invoice-privilege-label" style="color: #34d399; font-weight: 600;">Full Invoice Modification Permitted</span>
+                </div>
+              </div>
+            </div>
+            <button class="btn-secondary" onclick="GingerApp.openLoginScreen()">
+              ðŸ” Switch Session / Test Other Role
+            </button>
+          </div>
+
+          <!-- Section 1: Staff User Accounts -->
+          <div style="margin-bottom: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <h2 style="font-size: 15px; font-weight: 700; color: var(--text-primary);">Authorized User Accounts</h2>
+              <span style="font-size: 12px; color: var(--text-tertiary);">Click 'Switch' to test software as that user</span>
+            </div>
+            <div class="table-card">
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>User Name</th>
+                      <th>Email Address</th>
+                      <th>Assigned Role</th>
+                      <th>Phone</th>
+                      <th>Status</th>
+                      <th>Last Login</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="users-table-body">
+                    <!-- Populated via JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Roles & Invoice Edit Rights -->
+          <div style="margin-bottom: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <h2 style="font-size: 15px; font-weight: 700; color: var(--text-primary);">Security Roles & Invoice Editing Permissions</h2>
+              <span style="font-size: 12px; color: var(--text-tertiary);">Toggle invoice edit rights for each role</span>
+            </div>
+            <div id="roles-cards-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+
+          <!-- Section 3: Fine-Grained Permissions Matrix -->
+          <div style="margin-bottom: 12px;">
+            <h2 style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">Module Permissions Matrix</h2>
+          </div>
+          <div class="table-card">
+            <div class="table-responsive">
+              <table class="data-table matrix-table">
+                <thead>
+                  <tr>
+                    <th>Module / Resource</th>
+                    <th>View</th>
+                    <th>Create</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>Approve</th>
+                    <th>Export</th>
+                  </tr>
+                </thead>
+                <tbody id="roles-matrix-body">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================================
+             14. SYSTEM SETTINGS
+             =================================================================== -->
+        <section id="page-settings" class="page-module">
+          <div class="module-header">
+            <div class="module-title-group">
+              <h1>Business & System Settings</h1>
+              <p>Configure Ginger Carwash Services details, operational capacity, currencies, and Tax & VAT rates.</p>
+            </div>
+            <div class="module-actions">
+              <button class="btn-primary" onclick="GingerApp.saveSettings(event)">Save All Settings</button>
+            </div>
+          </div>
+
+          <div class="table-card" style="padding: 24px; max-width: 820px;">
+            <form onsubmit="GingerApp.saveSettings(event)">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Business Name <span class="required">*</span></label>
+                  <input type="text" class="form-control" id="set-business-name">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Branch Station Name</label>
+                  <input type="text" class="form-control" id="set-branch-name">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Contact Phone</label>
+                  <input type="text" class="form-control" id="set-phone">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Support Email</label>
+                  <input type="email" class="form-control" id="set-email">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Default Currency Symbol</label>
+                  <select class="form-control" id="set-currency">
+                    <option value="â‚¹">â‚¹ (INR - Indian Rupee)</option>
+                    <option value="$">$ (USD - US Dollar)</option>
+                    <option value="AED">AED (Emirati Dirham)</option>
+                    <option value="QAR">QAR (Qatari Riyal)</option>
+                    <option value="SAR">SAR (Saudi Riyal)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Tax Rate (%)</label>
+                  <input type="number" class="form-control" id="set-tax-rate" step="0.5">
+                </div>
+              </div>
+              <div style="margin-top: 20px;">
+                <button type="submit" class="btn-primary">Save Changes</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Section: Tax & VAT Configuration (Requirement 6) -->
+          <div style="margin-top: 30px; max-width: 820px;" id="tax-vat-settings-section">
+            <div class="table-card" style="padding: 24px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 14px;">
+                <div>
+                  <h2 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin: 0 0 4px 0;">Tax & VAT Configuration</h2>
+                  <p style="font-size: 12px; color: var(--text-tertiary); margin: 0;">Configure tax rules, VAT percentage, and applicability across services, packages, and billing.</p>
+                </div>
+                <span class="badge badge-paid" style="font-size: 11px;">Finance & Compliance</span>
+              </div>
+              <form id="tax-vat-settings-form" onsubmit="GingerApp.saveTaxVatSettings(event)">
+                <div class="form-grid">
+                  <div class="form-group col-span-2">
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 600; font-size: 13.5px; color: var(--text-primary);">
+                      <input type="checkbox" id="set-vat-enabled" onchange="GingerApp.onVatToggleChange()" style="width: 18px; height: 18px; accent-color: var(--primary-500);">
+                      <span>Enable Tax / VAT on Invoices & Bookings</span>
+                    </label>
+                    <span style="font-size: 11.5px; color: var(--text-tertiary); display: block; margin-top: 4px; margin-left: 28px;">
+                      When enabled, tax is automatically calculated on taxable amounts and shown on booking summaries and invoices.
+                    </span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Tax / VAT Name <span class="required">*</span></label>
+                    <input type="text" class="form-control" id="set-vat-name" placeholder="e.g. VAT, GST, Sales Tax" required oninput="GingerApp.updateTaxVatPreview()">
+                    <span style="font-size: 11px; color: var(--text-tertiary);">Label displayed on customer invoices and booking breakdowns.</span>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Tax / VAT Percentage (%) <span class="required">*</span></label>
+                    <input type="number" class="form-control" id="set-vat-rate" placeholder="5" step="0.1" min="0" max="100" required oninput="GingerApp.updateTaxVatPreview()">
+                    <span style="font-size: 11px; color: var(--text-tertiary);">Standard percentage applied to taxable amounts (default: 5%).</span>
+                  </div>
+                  <div class="form-group col-span-2">
+                    <label class="form-label">Tax Applicability Scope <span class="required">*</span></label>
+                    <select class="form-control" id="set-vat-scope" onchange="GingerApp.updateTaxVatPreview()">
+                      <option value="all">All taxable items (Services, Packages & Add-ons)</option>
+                      <option value="services">Services only</option>
+                      <option value="packages">Packages only</option>
+                      <option value="addons">Add-ons only</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Live Tax Calculation Example / Simulation Card (Requirement 6) -->
+                <div style="margin-top: 18px; background: var(--bg-surface-elevated); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 16px;">
+                  <div style="font-weight: 700; font-size: 11.5px; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 10px; display: flex; justify-content: space-between;">
+                    <span>Live Tax Calculation Simulation</span>
+                    <span style="color: var(--primary-500);">Standard Model</span>
+                  </div>
+                  <div id="vat-simulation-card" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; font-size: 12.5px;">
+                    <!-- Rendered dynamically by GingerApp.updateTaxVatPreview() -->
+                  </div>
+                  <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 10px; border-top: 1px solid var(--border-subtle); padding-top: 8px;">
+                    â„¹ Formula: <strong>Taxable Amount</strong> = Subtotal âˆ’ Discounts/Offers. <strong>VAT Amount</strong> = Taxable Amount Ã— VAT %. <strong>Grand Total</strong> = Taxable Amount + VAT.
+                  </div>
+                </div>
+
+                <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
+                  <button type="submit" class="btn-primary">Save Tax & VAT Settings</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       GLOBAL MODALS & DRAWERS
+       ========================================================================= -->
+
+  <!-- 1. Global Search Results Palette -->
+  <div class="modal-backdrop" id="global-search-modal">
+    <div class="modal-container search-palette-modal">
+      <div class="search-palette-input-wrap">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--text-tertiary);">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" class="search-palette-input" id="palette-search-input" placeholder="Type to search packages, customers, plates, bookings, invoices...">
+        <button class="modal-close-trigger table-icon-btn">âœ•</button>
+      </div>
+      <div class="search-palette-results custom-scroll" id="palette-search-results">
+        <!-- Rendered live -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Add Booking Modal (Multi-Vehicle Booking with Offer Pricing & VAT) -->
+  <div class="modal-backdrop active" id="add-booking-modal" style="opacity: 1; pointer-events: auto;">
+    <div class="modal-container modal-xl">
+      <div class="modal-header">
+        <div class="modal-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>Create Service Booking</span>
+        </div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <form id="form-create-booking" onsubmit="GingerApp.submitNewBooking(); return false;">
+        <div class="modal-body custom-scroll">
+          
+          <!-- Step 1: Customer Selection (Requirement 2 & 7) -->
+          <div style="background: var(--bg-surface-elevated); padding: 14px 18px; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <label class="form-label" style="font-weight: 700; font-size: 13.5px; margin: 0; display: flex; align-items: center; gap: 6px;">
+                <span class="badge" style="background: var(--primary-500); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px;">1</span>
+                <span>Customer Selection <span class="required">*</span></span>
+              </label>
+              <button type="button" class="btn-action btn-sm" onclick="GingerApp.openAddCustomerFromBooking()" style="font-size: 11.5px;">+ Add Customer</button>
+            </div>
+            <select class="form-control" id="form-booking-customer" required onchange="GingerApp.onBookingCustomerChange(this.value)">
+              <!-- Populated via JS -->
+            </select>
+          </div>
+
+          <!-- Step 2: Vehicles Selection (Multiple Vehicles with Checkboxes, Requirement 2) -->
+          <div style="background: var(--bg-surface-elevated); padding: 14px 18px; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <div>
+                <label class="form-label" style="font-weight: 700; font-size: 13.5px; margin: 0; display: flex; align-items: center; gap: 6px;">
+                  <span class="badge" style="background: var(--primary-500); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px;">2</span>
+                  <span>Customer Vehicles <span class="required">*</span> (Select one or multiple)</span>
+                </label>
+                <div style="font-size: 11.5px; color: var(--text-tertiary); margin-left: 26px;">
+                  Check the vehicle(s) being serviced today. Multiple vehicles can be booked in a single session.
+                </div>
+              </div>
+              <button type="button" class="btn-action btn-sm" onclick="GingerApp.openAddVehicleFromBooking()" style="font-size: 11.5px;">+ Add New Vehicle</button>
+            </div>
+            <div id="booking-vehicles-selection-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px;">
+              <div style="font-size: 12.5px; color: var(--text-tertiary); padding: 8px;">Please select a customer above to view their fleet.</div>
+            </div>
+          </div>
+
+          <!-- Step 3: Multi-Vehicle Service & Add-ons Configuration (Requirement 3) -->
+          <div style="background: var(--bg-surface-elevated); padding: 14px 18px; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle); margin-bottom: 16px;">
+            <div style="margin-bottom: 12px;">
+              <label class="form-label" style="font-weight: 700; font-size: 13.5px; margin: 0; display: flex; align-items: center; gap: 6px;">
+                <span class="badge" style="background: var(--primary-500); color: #fff; width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px;">3</span>
+                <span>Vehicle Service Configuration <span class="required">*</span></span>
+              </label>
+              <div style="font-size: 11.5px; color: var(--text-tertiary); margin-left: 26px;">
+                Assign individual service / package and add-ons for each selected vehicle.
+              </div>
+            </div>
+            <div id="booking-vehicle-services-list" style="display: flex; flex-direction: column; gap: 12px;">
+              <div style="font-size: 12px; color: var(--text-tertiary); padding: 8px;">Select one or more vehicles above to assign services.</div>
+            </div>
+          </div>
+
+          <!-- Step 4: Date, Time, Staff & Payment Details (Requirement 7) -->
+          <div class="form-grid" style="margin-bottom: 16px;">
+            <div class="form-group">
+              <label class="form-label">Service Date <span class="required">*</span></label>
+              <input type="date" class="form-control" id="form-booking-date" value="2026-09-28" required onchange="GingerApp.recalculateBookingForm()">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Service Time <span class="required">*</span></label>
+              <input type="time" class="form-control" id="form-booking-time" value="14:00" required onchange="GingerApp.recalculateBookingForm()">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Assigned Staff / Lead Technician</label>
+              <select class="form-control" id="form-booking-staff" onchange="GingerApp.recalculateBookingForm()">
+                <option value="Tariq Mansoor">Tariq Mansoor (Lead Master Detailer)</option>
+                <option value="Sanjay Patel">Sanjay Patel (Operations Supervisor)</option>
+                <option value="Michael Chen">Michael Chen (QA Inspector)</option>
+                <option value="Zayd Al-Harbi">Zayd Al-Harbi (Senior Detailer)</option>
+                <option value="Carlos Silva">Carlos Silva (Hydro Specialist)</option>
+                <option value="Aisha Rahman">Aisha Rahman (Front Desk)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Payment Mode</label>
+              <select class="form-control" id="form-booking-payment-method">
+                <option value="Online UPI">Online UPI / QR</option>
+                <option value="Credit Card (POS)">Credit / Debit Card (POS)</option>
+                <option value="Cash on Delivery">Cash at Counter</option>
+                <option value="Corporate Account">Corporate Fleet Credit</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Payment Status</label>
+              <select class="form-control" id="form-booking-payment-status">
+                <option value="Pending">Pending Payment</option>
+                <option value="Paid">Paid</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Special Booking Notes</label>
+              <input type="text" class="form-control" id="form-booking-notes" placeholder="e.g. Care with rims, sanitize child seats...">
+            </div>
+          </div>
+
+          <!-- Step 5: Comprehensive Live Pricing Summary Card (Requirement 3, 5, 6, 7) -->
+          <div class="booking-summary-card">
+            <div class="booking-summary-header">
+              <span>ðŸ“‹ Live Pricing & Booking Summary</span>
+              <span style="font-size: 11.5px; color: var(--text-tertiary);" id="bs-items-count-badge">0 vehicles selected</span>
+            </div>
+            <div id="booking-summary-vehicles-breakdown" style="padding: 12px 18px; border-bottom: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: 8px;">
+              <!-- Live per-vehicle itemization rendered by JS -->
+            </div>
+            <div class="booking-summary-totals">
+              <div class="booking-summary-total-row">
+                <span>Subtotal:</span>
+                <span id="bf-calc-subtotal" style="font-family: var(--font-mono); font-weight: 600;">â‚¹ 0</span>
+              </div>
+              <div class="booking-summary-total-row">
+                <span>Offer / Discount:</span>
+                <span id="bf-calc-discount" style="font-family: var(--font-mono); font-weight: 600; color: #10b981;">â‚¹ 0</span>
+              </div>
+              <div class="booking-summary-total-row">
+                <span>Taxable Amount:</span>
+                <span id="bf-calc-taxable" style="font-family: var(--font-mono); font-weight: 600;">â‚¹ 0</span>
+              </div>
+              <div class="booking-summary-total-row">
+                <span id="bf-calc-tax-label">VAT (5%):</span>
+                <span id="bf-calc-tax" style="font-family: var(--font-mono); font-weight: 600;">â‚¹ 0</span>
+              </div>
+              <div class="booking-summary-total-row grand-total">
+                <span>Grand Total:</span>
+                <span id="bf-calc-grandtotal" style="font-family: var(--font-mono); color: var(--primary-500); font-size: 18px;">â‚¹ 0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn-primary" id="btn-submit-booking-action">Confirm & Create Booking</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. Edit Booking Modal -->
+  <div class="modal-backdrop" id="edit-booking-modal">
+    <div class="modal-container modal-md">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>Edit Booking:</span>
+          <span class="mono-tag" id="edit-booking-id-title"></span>
+        </div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <form onsubmit="GingerApp.saveEditedBooking(event)">
+        <input type="hidden" id="edit-booking-id-hidden">
+        <div class="modal-body custom-scroll">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Booking Date</label>
+              <input type="date" class="form-control" id="edit-booking-date" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Appointment Time</label>
+              <input type="time" class="form-control" id="edit-booking-time" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Service Status</label>
+              <select class="form-control" id="edit-booking-status">
+                <option value="Confirmed">Confirmed</option>
+                <option value="Checked In">Checked In</option>
+                <option value="In Service">In Service</option>
+                <option value="Quality Check">Quality Check</option>
+                <option value="Ready for Pickup">Ready for Pickup</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Assigned Staff</label>
+              <select class="form-control" id="edit-booking-staff">
+                <option value="Tariq Mansoor">Tariq Mansoor</option>
+                <option value="Sanjay Patel">Sanjay Patel</option>
+                <option value="Michael Chen">Michael Chen</option>
+                <option value="Zayd Al-Harbi">Zayd Al-Harbi</option>
+                <option value="Carlos Silva">Carlos Silva</option>
+              </select>
+            </div>
+            <div class="form-group col-span-2">
+              <label class="form-label">Booking Status</label>
+              <select class="form-control" id="edit-booking-status">
+                <option value="Pending">Pending</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Checked In">Checked In</option>
+                <option value="In Service">In Service</option>
+                <option value="Quality Check">Quality Check</option>
+                <option value="Ready for Pickup">Ready for Pickup</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
+            <div class="form-group col-span-2">
+              <label class="form-label">Notes</label>
+              <textarea class="form-control" id="edit-booking-notes"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn-primary">Update Booking</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. Create & Edit Package Modal -->
+  <div class="modal-backdrop" id="package-form-modal">
+    <div class="modal-container modal-lg">
+      <div class="modal-header">
+        <div class="modal-title" id="form-package-title">Create Car Wash Package</div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <form onsubmit="GingerApp.savePackage(event, false)">
+        <input type="hidden" id="pkg-id-hidden">
+        <div class="modal-body custom-scroll">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Package Name <span class="required">*</span></label>
+              <input type="text" class="form-control" id="pkg-name-input" placeholder="e.g. Platinum Ceramic Detailing Package" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Package Category / Type <span class="required">*</span></label>
+              <select class="form-control" id="pkg-type-select">
+                <option value="Basic Wash">Basic Wash</option>
+                <option value="Standard Wash">Standard Wash</option>
+                <option value="Premium Wash">Premium Wash</option>
+                <option value="Interior Cleaning">Interior Cleaning</option>
+                <option value="Exterior Cleaning">Exterior Cleaning</option>
+                <option value="Full Car Detailing">Full Car Detailing</option>
+                <option value="Express Wash">Express Wash</option>
+                <option value="Deep Cleaning">Deep Cleaning</option>
+                <option value="SUV / Large Vehicle Packages">SUV / Large Vehicle Packages</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Applicable Vehicle Type</label>
+              <select class="form-control" id="pkg-vehicle-type">
+                <option value="All Types">All Types</option>
+                <option value="Sedan / Hatchback">Sedan / Hatchback</option>
+                <option value="SUV / Truck">SUV / Truck</option>
+                <option value="Luxury / Exotic">Luxury / Exotic</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Estimated Service Duration</label>
+              <input type="text" class="form-control" id="pkg-duration-input" placeholder="e.g. 75 mins" required>
+            </div>
+            <div class="form-group col-span-2">
+              <label class="form-label">Package Description</label>
+              <textarea class="form-control" id="pkg-desc-input" placeholder="Detailed customer-facing description of what this package delivers..."></textarea>
+            </div>
+
+            <!-- Included Services Multi-select -->
+            <div class="form-group col-span-2">
+              <label class="form-label">Included Wash & Detailing Services <span class="required">*</span> (Select services to bundle)</label>
+              <div id="pkg-services-checklist" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; max-height: 180px; overflow-y: auto; padding: 4px;">
+                <!-- Populated via JS -->
+              </div>
+            </div>
+
+            <!-- Pricing & Offer Configuration (Requirement 5) -->
+            <div class="form-group col-span-2" style="background: var(--bg-surface-elevated); padding: 14px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); margin-top: 4px;">
+              <div style="font-weight: 700; font-size: 12.5px; color: var(--text-primary); margin-bottom: 10px;">
+                <span>ðŸ’° Package Pricing & Direct Offer Configuration</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Regular Price / Individual Value (â‚¹) <span class="required">*</span></label>
+                  <input type="number" class="form-control" id="pkg-reg-price-input" placeholder="e.g. 7150" required oninput="GingerApp.onPackagePricingChange()">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Offer Type <span class="required">*</span></label>
+                  <select class="form-control" id="pkg-offer-type-select" onchange="GingerApp.onPackagePricingChange()">
+                    <option value="none">No Offer (Regular Price)</option>
+                    <option value="percentage">Percentage Discount (% OFF)</option>
+                    <option value="fixed" selected>Fixed Offer Price (â‚¹)</option>
+                  </select>
+                </div>
+                <div class="form-group" id="pkg-discount-pct-group" style="display: none;">
+                  <label class="form-label">Discount %</label>
+                  <input type="number" class="form-control" id="pkg-discount-pct-input" placeholder="e.g. 20" min="0" max="100" oninput="GingerApp.onPackagePricingChange()">
+                </div>
+                <div class="form-group" id="pkg-offer-price-group">
+                  <label class="form-label">Offer Price (â‚¹)</label>
+                  <input type="number" class="form-control" id="pkg-offer-price-input" placeholder="e.g. 5200" min="0" oninput="GingerApp.onPackagePricingChange()">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Package Status</label>
+                  <select class="form-control" id="pkg-status-select">
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                  </select>
+                </div>
+                <div class="form-group col-span-2">
+                  <div id="pkg-calc-summary" style="background: var(--bg-surface); padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; color: #10b981; border: 1px solid var(--border-medium);">
+                    Final Price: â‚¹ 0
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary modal-close-trigger">Cancel</button>
+          <button type="button" class="btn-secondary" onclick="GingerApp.savePackage(event, true)">Save & Add Another</button>
+          <button type="submit" class="btn-primary">Save Package</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 5. Package Details Modal -->
+  <div class="modal-backdrop" id="package-details-modal">
+    <div class="modal-container modal-md">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span id="pd-title">Package Details</span>
+          <span class="mono-tag" id="pd-type-badge"></span>
+          <div id="pd-status-badge"></div>
+        </div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <div class="modal-body custom-scroll">
+        <p id="pd-desc" style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.5;"></p>
+        
+        <div class="form-grid" style="margin-bottom: 16px;">
+          <div><span style="color: var(--text-tertiary);">Vehicle Type:</span> <strong id="pd-vehicle-type"></strong></div>
+          <div><span style="color: var(--text-tertiary);">Duration:</span> <strong id="pd-duration"></strong></div>
+          <div><span style="color: var(--text-tertiary);">Regular Value:</span> <span id="pd-reg-price" style="text-decoration: line-through; color: var(--text-tertiary);"></span></div>
+          <div><span style="color: var(--text-tertiary);">Package Price:</span> <strong id="pd-pkg-price" style="color: #3b82f6; font-size: 15px;"></strong></div>
+          <div><span style="color: var(--text-tertiary);">Customer Savings:</span> <strong id="pd-savings" style="color: #10b981;"></strong></div>
+          <div><span style="color: var(--text-tertiary);">Final with Tax:</span> <strong id="pd-final-price" style="color: #34d399;"></strong></div>
+        </div>
+
+        <div style="background: var(--bg-surface-elevated); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); margin-bottom: 16px;">
+          <div style="font-weight: 700; font-size: 12px; color: var(--text-primary); text-transform: uppercase; margin-bottom: 8px;">
+            Included Wash & Detailing Services:
+          </div>
+          <ul id="pd-included-services" style="list-style: none; padding: 0; margin: 0;">
+            <!-- Populated via JS -->
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" id="pd-btn-duplicate">Duplicate</button>
+        <button type="button" class="btn-secondary" id="pd-btn-toggle">Enable / Disable</button>
+        <button type="button" class="btn-secondary" id="pd-btn-edit">Edit Package</button>
+        <button type="button" class="btn-danger" id="pd-btn-delete">Delete</button>
+        <button type="button" class="btn-primary" id="pd-btn-book">Book This Package</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Service Form Modal (Create & Edit with Direct Offer Pricing) -->
+  <div class="modal-backdrop" id="service-form-modal">
+    <div class="modal-container modal-lg">
+      <div class="modal-header">
+        <div class="modal-title" id="form-service-title">Add Wash Service</div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <form onsubmit="GingerApp.saveService(event)">
+        <input type="hidden" id="srv-id-hidden">
+        <div class="modal-body custom-scroll">
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label class="form-label">Service Name <span class="required">*</span></label>
+              <input type="text" class="form-control" id="srv-name-input" placeholder="e.g. Premium Wash" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select class="form-control" id="srv-cat-select">
+                <option value="Exterior Wash">Exterior Wash</option>
+                <option value="Interior Cleaning">Interior Cleaning</option>
+                <option value="Exterior Cleaning">Exterior Cleaning</option>
+                <option value="Ceramic & Protection">Ceramic & Protection</option>
+                <option value="Express Wash">Express Wash</option>
+                <option value="Full Car Detailing">Full Car Detailing</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Applicable Vehicle Type</label>
+              <select class="form-control" id="srv-vehicle-type">
+                <option value="All Types">All Types</option>
+                <option value="Sedan">Sedan</option>
+                <option value="SUV">SUV</option>
+                <option value="SUV / Truck">SUV / Truck</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Duration</label>
+              <input type="text" class="form-control" id="srv-duration-input" placeholder="e.g. 45 mins" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Status</label>
+              <select class="form-control" id="srv-status-select">
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
+
+            <!-- Offer / Discount Pricing Configuration (Requirement 5) -->
+            <div class="form-group col-span-2" style="background: var(--bg-surface-elevated); padding: 14px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); margin-top: 4px;">
+              <div style="font-weight: 700; font-size: 12.5px; color: var(--text-primary); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                <span>ðŸ’° Service Pricing & Offer Configuration</span>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label">Regular Price (â‚¹) <span class="required">*</span></label>
+                  <input type="number" class="form-control" id="srv-reg-price-input" placeholder="e.g. 1500" required oninput="GingerApp.onServicePricingChange()">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Offer Type <span class="required">*</span></label>
+                  <select class="form-control" id="srv-offer-type-select" onchange="GingerApp.onServicePricingChange()">
+                    <option value="none">No Offer (Regular Price)</option>
+                    <option value="percentage">Percentage Discount (% OFF)</option>
+                    <option value="fixed">Fixed Offer Price (â‚¹)</option>
+                  </select>
+                </div>
+                <div class="form-group" id="srv-discount-pct-group" style="display: none;">
+                  <label class="form-label">Discount %</label>
+                  <input type="number" class="form-control" id="srv-discount-pct-input" placeholder="e.g. 10" min="0" max="100" oninput="GingerApp.onServicePricingChange()">
+                </div>
+                <div class="form-group" id="srv-offer-price-group" style="display: none;">
+                  <label class="form-label">Offer Price (â‚¹)</label>
+                  <input type="number" class="form-control" id="srv-offer-price-input" placeholder="e.g. 1350" min="0" oninput="GingerApp.onServicePricingChange()">
+                </div>
+                <div class="form-group col-span-2">
+                  <div id="srv-pricing-calc-preview" style="padding: 10px 14px; background: var(--bg-surface); border-radius: var(--radius-sm); border: 1px solid var(--border-medium); font-size: 13px; font-weight: 600; color: #10b981;">
+                    Final Price: â‚¹ 0
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group col-span-2">
+              <label class="form-label">Description</label>
+              <textarea class="form-control" id="srv-desc-input" placeholder="Detailed service description..."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn-primary">Save Service</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 7. Customer Form Modal (Create & Edit) -->
+  <div class="modal-backdrop" id="customer-form-modal">
+    <div class="modal-container modal-sm">
+      <div class="modal-header">
+        <div class="modal-title" id="form-cust-modal-title">Register Customer</div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <form onsubmit="GingerApp.saveCustomer(event)">
+        <input type="hidden" id="cust-id-hidden">
+        <div class="modal-body custom-scroll">
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Customer Full Name <span class="required">*</span></label>
+            <input type="text" class="form-control" id="cust-name-input" required placeholder="e.g. Fatima Al-Zahra">
+          </div>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Phone Number <span class="required">*</span></label>
+            <input type="tel" class="form-control" id="cust-phone-input" required placeholder="e.g. +91 98200 12345">
+          </div>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="cust-email-input" placeholder="e.g. customer@domain.com">
+          </div>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Customer Tier</label>
+            <select class="form-control" id="cust-tier-select">
+              <option value="Active">Standard Customer</option>
+              <option value="VIP">VIP Account</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Special Notes & Preferences</label>
+            <input type="text" class="form-control" id="cust-notes-input" placeholder="e.g. No heavy chemical fragrance...">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn-primary">Save Customer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 8. Vehicle Form Modal (Create & Edit) -->
+  <div class="modal-backdrop" id="vehicle-form-modal">
+    <div class="modal-container modal-md">
+      <div class="modal-header">
+        <div class="modal-title" id="form-veh-modal-title">Register Vehicle</div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <form onsubmit="GingerApp.saveVehicle(event)">
+        <input type="hidden" id="veh-plate-hidden">
+        <div class="modal-body custom-scroll">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Plate / Registration Number <span class="required">*</span></label>
+              <input type="text" class="form-control" id="veh-plate-input" required placeholder="e.g. DXB 99012">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Owner Customer <span class="required">*</span></label>
+              <select class="form-control" id="veh-owner-select" required>
+                <!-- Populated via JS -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Vehicle Make</label>
+              <input type="text" class="form-control" id="veh-make-input" placeholder="e.g. Porsche">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Model <span class="required">*</span></label>
+              <input type="text" class="form-control" id="veh-model-input" placeholder="e.g. Cayenne Turbo" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Model Year</label>
+              <input type="number" class="form-control" id="veh-year-input" value="2024">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Body Type</label>
+              <select class="form-control" id="veh-type-select">
+                <option value="SUV">SUV</option>
+                <option value="Sedan">Sedan</option>
+                <option value="Coupe">Coupe / Sports</option>
+                <option value="Truck">Truck / Van</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Paint Color</label>
+              <input type="text" class="form-control" id="veh-color-input" placeholder="e.g. Jet Black Metallic">
+            </div>
+            <div class="form-group">
+              <label class="form-label">VIN / Chassis Number</label>
+              <input type="text" class="form-control" id="veh-vin-input" placeholder="VIN-17-digits">
+            </div>
+            <div class="form-group col-span-2">
+              <label class="form-label">Pre-existing Condition / Damage Notes</label>
+              <input type="text" class="form-control" id="veh-condition-input" placeholder="e.g. Minor scuff on passenger mirror...">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn-primary">Save Vehicle</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 9. Staff Form Modal (Create & Edit) -->
+  <div class="modal-backdrop" id="staff-form-modal">
+    <div class="modal-container modal-sm">
+      <div class="modal-header">
+        <div class="modal-title" id="form-staff-modal-title">Staff Member</div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <form onsubmit="GingerApp.saveStaff(event)">
+        <input type="hidden" id="stf-id-hidden">
+        <div class="modal-body custom-scroll">
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Full Name <span class="required">*</span></label>
+            <input type="text" class="form-control" id="stf-name-input" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Role</label>
+            <select class="form-control" id="stf-role-select">
+              <option value="Lead Master Detailer">Lead Master Detailer</option>
+              <option value="Service Supervisor">Service Supervisor</option>
+              <option value="Quality Assurance Inspector">Quality Assurance Inspector</option>
+              <option value="Senior Detailer">Senior Detailer</option>
+              <option value="Hydro Wash Specialist">Hydro Wash Specialist</option>
+              <option value="Front Desk & Cashier">Front Desk & Cashier</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="stf-phone-input" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Specialization / Work Area</label>
+            <input type="text" class="form-control" id="stf-spec-input" value="Detailing & Wash Area">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Availability</label>
+            <select class="form-control" id="stf-avail-select">
+              <option value="Available">Available</option>
+              <option value="In Service">In Service</option>
+              <option value="Off Duty">Off Duty</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn-primary">Save Staff</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 10. Product Form Modal -->
+  <div class="modal-backdrop" id="product-form-modal">
+    <div class="modal-container modal-md">
+      <div class="modal-header">
+        <div class="modal-title" id="form-product-modal-title">Inventory Item</div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <form onsubmit="GingerApp.saveProduct(event)">
+        <input type="hidden" id="prod-id-hidden">
+        <div class="modal-body custom-scroll">
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label class="form-label">Product Name <span class="required">*</span></label>
+              <input type="text" class="form-control" id="prod-name-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select class="form-control" id="prod-cat-select">
+                <option value="Shampoos & Chemicals">Shampoos & Chemicals</option>
+                <option value="Interior Chemicals">Interior Chemicals</option>
+                <option value="Ceramic Coatings">Ceramic Coatings</option>
+                <option value="Tire & Engine Dressing">Tire & Engine Dressing</option>
+                <option value="Consumables & Towels">Consumables & Towels</option>
+                <option value="Exterior Chemicals">Exterior Chemicals</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">SKU Code</label>
+              <input type="text" class="form-control" id="prod-sku-input" placeholder="e.g. CHM-SNX-401">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Current Stock Quantity</label>
+              <input type="number" class="form-control" id="prod-stock-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Minimum Safety Threshold</label>
+              <input type="number" class="form-control" id="prod-min-input" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Unit of Measure</label>
+              <input type="text" class="form-control" id="prod-unit-input" placeholder="e.g. Cans (5L)">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Unit Cost Price (â‚¹)</label>
+              <input type="number" class="form-control" id="prod-cost-input" required>
+            </div>
+            <div class="form-group col-span-2">
+              <label class="form-label">Supplier</label>
+              <select class="form-control" id="prod-sup-select">
+                <!-- Populated via JS -->
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn-primary">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 11. Stock Adjustment Modal -->
+  <div class="modal-backdrop" id="stock-adjustment-modal">
+    <div class="modal-container modal-sm">
+      <div class="modal-header">
+        <div class="modal-title">Inventory Adjustment</div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <form onsubmit="GingerApp.saveStockAdjustment(event)">
+        <input type="hidden" id="stock-adj-prod-id">
+        <div class="modal-body custom-scroll">
+          <div style="font-weight: 700; font-size: 14px; margin-bottom: 4px; color: var(--text-primary);" id="stock-adj-prod-name"></div>
+          <div style="font-size: 12px; color: var(--text-tertiary); margin-bottom: 16px;">
+            Current On-Hand Stock: <strong id="stock-adj-current" style="color: #34d399;"></strong>
+          </div>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Adjustment Type</label>
+            <select class="form-control" id="stock-adj-type">
+              <option value="in">+ Stock In (Replenish)</option>
+              <option value="out">- Stock Out (Usage / Wastage)</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Quantity to Adjust <span class="required">*</span></label>
+            <input type="number" class="form-control" id="stock-adj-qty" min="1" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Reason / Reference Note</label>
+            <input type="text" class="form-control" id="stock-adj-reason" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn-primary">Confirm Adjustment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 12. Supplier Form Modal -->
+  <div class="modal-backdrop" id="supplier-form-modal">
+    <div class="modal-container modal-sm">
+      <div class="modal-header">
+        <div class="modal-title">Add Supplier</div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <form onsubmit="GingerApp.saveSupplier(event)">
+        <div class="modal-body custom-scroll">
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Supplier Company Name <span class="required">*</span></label>
+            <input type="text" class="form-control" id="sup-name-input" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Contact Person</label>
+            <input type="text" class="form-control" id="sup-contact-input">
+          </div>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="form-control" id="sup-phone-input">
+          </div>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" id="sup-email-input">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Supply Category</label>
+            <input type="text" class="form-control" id="sup-cat-input" placeholder="e.g. Chemicals & Compounds">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn-primary">Save Supplier</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 13. EDITABLE INVOICE MODAL -->
+  <div class="modal-backdrop" id="edit-invoice-modal">
+    <div class="modal-container modal-lg">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>Edit Invoice:</span>
+          <span class="mono-tag" id="edit-inv-number-badge" style="color: #38bdf8;"></span>
+        </div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <form onsubmit="InvoiceEngine.saveEditedInvoice(event)">
+        <input type="hidden" id="edit-inv-id-hidden">
+        <div class="modal-body custom-scroll">
+          <div class="form-grid" style="margin-bottom: 16px;">
+            <div class="form-group">
+              <label class="form-label">Customer</label>
+              <input type="text" class="form-control" id="edit-inv-customer" disabled>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Vehicle</label>
+              <input type="text" class="form-control" id="edit-inv-vehicle" disabled>
+            </div>
+          </div>
+
+          <!-- Line Items Table -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 700; font-size: 13px; color: var(--text-primary);">Itemized Services & Add-ons</span>
+            <button type="button" class="btn-secondary btn-sm" onclick="InvoiceEngine.addEditLineItem()">+ Add Item</button>
+          </div>
+          <table class="edit-inv-table">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th style="width: 80px;">Qty</th>
+                <th style="width: 130px;">Unit Rate (â‚¹)</th>
+                <th style="width: 120px; text-align: right;">Total</th>
+                <th style="width: 40px;"></th>
+              </tr>
+            </thead>
+            <tbody id="edit-inv-items-body">
+              <!-- Populated live -->
+            </tbody>
+          </table>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Discount Amount (â‚¹)</label>
+              <input type="number" class="form-control" id="edit-inv-discount" min="0" oninput="InvoiceEngine.recalculateEditInvoice()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tax Rate (%)</label>
+              <input type="number" class="form-control" id="edit-inv-taxrate" step="0.5" oninput="InvoiceEngine.recalculateEditInvoice()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Invoice Status</label>
+              <select class="form-control" id="edit-inv-status">
+                <option value="Draft">Draft</option>
+                <option value="Generated">Generated</option>
+                <option value="Pending Payment">Pending Payment</option>
+                <option value="Partially Paid">Partially Paid</option>
+                <option value="Paid">Paid</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Invoice Notes</label>
+              <input type="text" class="form-control" id="edit-inv-notes" placeholder="Optional notes on invoice...">
+            </div>
+          </div>
+
+          <!-- Mandatory Audit Reason Input -->
+          <div class="form-group" style="margin-top: 14px; background: rgba(245, 158, 11, 0.08); padding: 12px; border-radius: var(--radius-md); border: 1px solid rgba(245, 158, 11, 0.3);">
+            <label class="form-label" style="color: #f59e0b;">
+              Reason for Invoice Modification <span class="required">* (Recorded in Audit History)</span>
+            </label>
+            <input type="text" class="form-control" id="edit-inv-reason" placeholder="e.g. VIP client discount applied, Added extra detailing labor..." required>
+          </div>
+
+          <!-- Live Totals Box -->
+          <div style="background: var(--bg-surface-elevated); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); margin-top: 14px;">
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+              <span>Subtotal:</span> <strong id="edit-inv-calc-subtotal">â‚¹ 0</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px;">
+              <span>Tax Amount:</span> <strong id="edit-inv-calc-tax">â‚¹ 0</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 15px; font-weight: 800; border-top: 1px solid var(--border-subtle); padding-top: 6px;">
+              <span>Updated Total:</span> <strong id="edit-inv-calc-grandtotal" style="color: #2563eb;">â‚¹ 0</strong>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn-primary">Save & Record Audit Entry</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 14. Record Payment Modal -->
+  <div class="modal-backdrop" id="record-payment-modal">
+    <div class="modal-container modal-sm">
+      <div class="modal-header">
+        <div class="modal-title">Record Payment</div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <form onsubmit="InvoiceEngine.submitPayment(event)">
+        <input type="hidden" id="pay-inv-id-hidden">
+        <div class="modal-body custom-scroll">
+          <div style="background: var(--bg-surface-elevated); padding: 10px; border-radius: var(--radius-md); margin-bottom: 14px;">
+            <div><span style="color: var(--text-tertiary);">Invoice:</span> <strong id="pay-inv-num-label"></strong></div>
+            <div><span style="color: var(--text-tertiary);">Customer:</span> <strong id="pay-customer-label"></strong></div>
+            <div><span style="color: var(--text-tertiary);">Total Due:</span> <strong id="pay-total-label" style="color: #34d399;"></strong></div>
+          </div>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Payment Method <span class="required">*</span></label>
+            <select class="form-control" id="pay-method-select">
+              <option value="Credit Card (POS)">Credit / Debit Card (POS)</option>
+              <option value="Online UPI">Online UPI / QR Code</option>
+              <option value="Cash">Cash at Counter</option>
+              <option value="Bank Transfer">Direct Bank Transfer</option>
+              <option value="Corporate Account">Corporate Fleet Credit</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Amount Collected (â‚¹) <span class="required">*</span></label>
+            <input type="number" class="form-control" id="pay-amount-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Transaction Reference / Receipt Notes</label>
+            <input type="text" class="form-control" id="pay-ref-input" placeholder="e.g. POS Auth #841029">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn-success">Record Payment Receipt</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 15. Printable Invoice Modal -->
+  <div class="modal-backdrop" id="printable-invoice-modal">
+    <div class="modal-container modal-lg">
+      <div class="modal-header no-print">
+        <div class="modal-title">
+          <span>Tax Invoice Document</span>
+        </div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <div class="modal-body custom-scroll" id="invoice-render-sheet">
+        <!-- Rendered via InvoiceEngine -->
+      </div>
+      <div class="modal-footer no-print">
+        <button class="btn-secondary modal-close-trigger">Close</button>
+        <button class="btn-secondary" id="btn-edit-invoice-action">âœ Edit Invoice</button>
+        <button class="btn-secondary" id="btn-download-invoice-action">Download</button>
+        <button class="btn-secondary" id="btn-send-invoice-action">âœ‰ Send Email/SMS</button>
+        <button class="btn-success" id="btn-record-payment-from-inv">Record Payment</button>
+        <button class="btn-primary" id="btn-print-invoice-action">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Print Invoice (A4)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 16. Confirmation Dialog Modal -->
+  <div class="modal-backdrop" id="confirmation-dialog-modal">
+    <div class="modal-container modal-sm">
+      <div class="modal-header">
+        <div class="modal-title" id="confirm-dialog-title">Confirm Action</div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <div class="modal-body">
+        <p id="confirm-dialog-msg" style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5;"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary modal-close-trigger">Cancel</button>
+        <button type="button" class="btn-danger" id="confirm-dialog-btn-action">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 17. Booking Details & Status Lifecycle Modal -->
+  <div class="modal-backdrop" id="booking-details-modal">
+    <div class="modal-container modal-xl">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>Booking:</span>
+          <span class="mono-tag" id="modal-booking-id-title" style="color: #60a5fa;">BK-2026-00482</span>
+          <div id="modal-booking-status-badge"></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <label style="font-size: 11.5px; font-weight: 600; color: var(--text-tertiary); margin: 0;">Update Status:</label>
+            <select id="bd-quick-status-select" class="form-control" style="width: auto; padding: 4px 8px; font-size: 12px; font-weight: 600;" onchange="GingerApp.changeBookingStatusFromSelect(this.value)">
+              <option value="Confirmed">Confirmed</option>
+              <option value="Checked In">Checked In</option>
+              <option value="In Service">In Service</option>
+              <option value="Quality Check">Quality Check</option>
+              <option value="Ready for Pickup">Ready for Pickup</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+          <button class="modal-close-trigger modal-close-btn">âœ•</button>
+        </div>
+      </div>
+
+      <div class="modal-body custom-scroll">
+        <!-- Simple 6-Stage Service Workflow Stepper -->
+        <div style="margin-bottom: 16px;">
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 8px;">
+            Service Lifecycle Progress
+          </div>
+          <div class="status-timeline-track" id="booking-status-timeline-track">
+            <!-- Populated via GingerApp.renderBookingStatusTrack() -->
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; align-items: start;">
+          <div>
+            <div class="invoice-info-card" style="background: var(--bg-surface-elevated); margin-bottom: 16px;">
+              <div class="form-grid">
+                <div>
+                  <div class="invoice-card-heading">Customer</div>
+                  <div id="bd-customer-name" style="font-weight: 700; color: var(--text-primary);">Ahmed Al Mansoori</div>
+                  <div id="bd-customer-phone" style="font-size: 12px; color: var(--text-tertiary);">+91 98201 11223</div>
+                </div>
+                <div>
+                  <div class="invoice-card-heading">Vehicle</div>
+                  <div id="bd-vehicle-plate" class="mono-tag" style="margin-bottom: 2px;">QTR 45821</div>
+                  <div id="bd-vehicle-model" style="font-size: 12px; color: var(--text-secondary);">Toyota Land Cruiser GR Sport</div>
+                </div>
+                <div>
+                  <div class="invoice-card-heading">Service Ordered</div>
+                  <div id="bd-service-name" style="font-weight: 600; color: var(--accent-cyan);">Platinum Detail Package</div>
+                </div>
+                <div>
+                  <div class="invoice-card-heading">Assigned Technician</div>
+                  <div style="font-weight: 600; color: var(--text-primary);"><span id="bd-assigned-staff">Tariq Mansoor</span></div>
+                </div>
+                <div>
+                  <div class="invoice-card-heading">Grand Total</div>
+                  <div id="bd-total-amount" style="font-size: 16px; font-weight: 800; font-family: var(--font-mono); color: #34d399;">â‚¹ 5,900</div>
+                </div>
+                <div>
+                  <div class="invoice-card-heading">Payment Status</div>
+                  <div id="bd-payment-status"></div>
+                </div>
+              </div>
+            </div>
+
+            <div style="font-size: 12.5px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">
+              Inspection Visual Audit (Pre-Wash vs Post-Detailing)
+            </div>
+            <div class="photo-inspection-grid">
+              <div class="inspection-photo-card">
+                <span class="inspection-photo-tag tag-before">PRE-SERVICE INTAKE</span>
+                <img id="bd-photo-before" class="inspection-img" src="assets/images/vehicle_before.jpg" alt="Vehicle Pre-wash Intake">
+                <div class="inspection-meta">
+                  <span>Intake Inspection</span>
+                  <span>Recorded: 09:35 AM</span>
+                </div>
+              </div>
+              <div class="inspection-photo-card">
+                <span class="inspection-photo-tag tag-after">QUALITY AUDIT PASS</span>
+                <img id="bd-photo-after" class="inspection-img" src="assets/images/vehicle_after.jpg" alt="Vehicle Post-detail Finish">
+                <div class="inspection-meta">
+                  <span>Mirror Finish Certified</span>
+                  <span>QC Passed: 11:20 AM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-card" style="padding: 16px;">
+            <div style="font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px; display: flex; justify-content: space-between;">
+              <span>Booking Status Timeline & History</span>
+              <span style="font-size: 11px; color: var(--text-tertiary);">Activity Log</span>
+            </div>
+            <div class="service-timeline-container custom-scroll" id="bd-timeline-steps">
+              <!-- Populated dynamically via JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-secondary" id="bd-btn-view-invoice">View Printable Invoice</button>
+        <button class="btn-action btn-action-status" onclick="GingerApp.openUpdateStatusModalFromCurrentBooking()">
+          ðŸ”„ Update Status â–¼
+        </button>
+        <button class="btn-secondary modal-close-trigger">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 18. Customer 360 Profile Modal (With Dedicated Vehicles & Service History Tabs) -->
+  <div class="modal-backdrop" id="customer-profile-modal">
+    <div class="modal-container modal-xl">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>Customer Profile:</span>
+          <span id="cd-name" style="color: #60a5fa;">Ahmed Al Mansoori</span>
+          <span class="badge" id="cd-tier-badge" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa;">VIP</span>
+        </div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <div class="modal-body custom-scroll">
+        <!-- Customer Top Stats Grid -->
+        <div class="form-grid" style="margin-bottom: 16px; background: var(--bg-surface-elevated); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <div><span style="color: var(--text-tertiary);">Customer ID:</span> <strong id="cd-id">CUST-1001</strong></div>
+          <div><span style="color: var(--text-tertiary);">Phone:</span> <strong id="cd-phone">+91 98201 11223</strong></div>
+          <div><span style="color: var(--text-tertiary);">Email:</span> <strong id="cd-email">ahmed@domain.com</strong></div>
+          <div><span style="color: var(--text-tertiary);">Lifetime Services:</span> <strong id="cd-total-bookings">14</strong></div>
+          <div><span style="color: var(--text-tertiary);">Lifetime Spend:</span> <strong id="cd-total-spend" style="color: #34d399;">â‚¹ 42,500</strong></div>
+          <div><span style="color: var(--text-tertiary);">Last Service Date:</span> <strong id="cd-last-service">2026-09-28</strong></div>
+        </div>
+
+        <div style="background: var(--bg-surface-elevated); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); margin-bottom: 18px;">
+          <div style="font-weight: 700; font-size: 11px; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 2px;">Preferences & Special Instructions:</div>
+          <div id="cd-notes" style="font-size: 12.5px; color: var(--text-secondary);">Preferred technician: Tariq Mansoor. Requests no heavy chemical fragrance.</div>
+        </div>
+
+        <!-- Dedicated Tab Navigation -->
+        <div class="tabs-nav" style="margin-bottom: 16px;">
+          <button class="tab-btn active" id="cust-tab-btn-vehicles" onclick="GingerApp.switchCustomerProfileTab('vehicles')">
+            ðŸš— Registered Vehicles (<span id="cust-profile-vehicles-count">0</span>)
+          </button>
+          <button class="tab-btn" id="cust-tab-btn-history" onclick="GingerApp.switchCustomerProfileTab('history')">
+            ðŸ“‹ Overall Service History (<span id="cust-profile-history-count">0</span>)
+          </button>
+          <button class="tab-btn" id="cust-tab-btn-invoices" onclick="GingerApp.switchCustomerProfileTab('invoices')">
+            ðŸ’³ Invoices (<span id="cust-profile-invoices-count">0</span>)
+          </button>
+        </div>
+
+        <!-- Tab 1: Dedicated Vehicles Section with + Add Vehicle -->
+        <div id="cust-tab-pane-vehicles">
+          <div class="customer-vehicles-toolbar">
+            <div style="font-size: 13px; font-weight: 700; color: var(--text-primary);">
+              Vehicles Registered to this Customer
+            </div>
+            <button type="button" class="btn-primary btn-sm" onclick="GingerApp.openAddVehicleForCustomer()">
+              + Add Vehicle
+            </button>
+          </div>
+          <div class="table-card" style="margin-bottom: 0;">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Vehicle Number</th>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                    <th>Vehicle Type</th>
+                    <th>Last Service</th>
+                    <th>Total Services</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="cust-vehicles-table-body">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Service History (Indicating Specific Vehicle Serviced) -->
+        <div id="cust-tab-pane-history" style="display: none;">
+          <div class="table-card" style="margin-bottom: 0;">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Vehicle</th>
+                    <th>Service / Package</th>
+                    <th>Amount</th>
+                    <th>Staff</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="cust-history-table-body">
+                  <!-- Populated via JS: Clearly showing vehicle plate & model -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Customer Invoices -->
+        <div id="cust-tab-pane-invoices" style="display: none;">
+          <div class="table-card" style="margin-bottom: 0;">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Invoice #</th>
+                    <th>Date</th>
+                    <th>Vehicle</th>
+                    <th>Service</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="cust-invoices-table-body">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-action btn-action-primary" onclick="GingerApp.openAddBookingForCustomer(GingerApp.activeProfileCustomerId)">
+          ï¼‹ Book Service
+        </button>
+        <button class="btn-secondary" id="cd-btn-edit">âœ Edit Customer</button>
+        <button class="btn-secondary modal-close-trigger">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 19. Vehicle Details & Dedicated Service History Modal -->
+  <div class="modal-backdrop" id="vehicle-details-modal">
+    <div class="modal-container modal-xl">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>Vehicle Details:</span>
+          <span class="mono-tag" id="vd-plate" style="color: #60a5fa;">QTR 45821</span>
+          <span id="vd-title" style="font-size: 14px; color: var(--text-secondary);">Toyota Land Cruiser 300</span>
+        </div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <div class="modal-body custom-scroll">
+        <div class="form-grid" style="margin-bottom: 16px; background: var(--bg-surface-elevated); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+          <div><span style="color: var(--text-tertiary);">Owner Customer:</span> <strong id="vd-owner" style="color: #60a5fa; cursor: pointer;">Ahmed Al Mansoori</strong></div>
+          <div><span style="color: var(--text-tertiary);">VIN / Chassis:</span> <strong id="vd-vin" style="font-family: var(--font-mono);">JTMBR05J8P4019283</strong></div>
+          <div><span style="color: var(--text-tertiary);">Body Type:</span> <strong id="vd-type">SUV</strong></div>
+          <div><span style="color: var(--text-tertiary);">Color:</span> <strong id="vd-color">Midnight Black Metallic</strong></div>
+          <div><span style="color: var(--text-tertiary);">Model Year:</span> <strong id="vd-year">2024</strong></div>
+          <div><span style="color: var(--text-tertiary);">Total Washes:</span> <strong id="vd-total-services">8</strong></div>
+        </div>
+
+        <div style="background: var(--bg-surface-elevated); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); margin-bottom: 16px;">
+          <div style="font-weight: 700; font-size: 11px; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 2px;">Condition & Handling Notes:</div>
+          <div id="vd-condition" style="font-size: 12.5px; color: var(--text-secondary);">Minor road rash on front right bumper lip. Ceramic topcoat in good condition.</div>
+        </div>
+
+        <!-- Dedicated Vehicle Service History Section (Requirement 7) -->
+        <div style="margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <div style="font-size: 13.5px; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 8px;">
+              <span>Vehicle Service History</span>
+              <span class="badge" id="vd-history-badge" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">Dedicated History</span>
+            </div>
+            <span id="vd-history-count" style="font-size: 11.5px; color: var(--text-tertiary);">Showing services for this vehicle only</span>
+          </div>
+          <div class="table-card" style="margin-bottom: 0;">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Service / Package</th>
+                    <th>Amount</th>
+                    <th>Staff</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="vd-history-table-body">
+                  <!-- Populated via JS: Specific to this vehicle -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Inspection Photos -->
+        <div style="font-size: 12.5px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">
+          Vehicle Intake & Inspection Photos
+        </div>
+        <div class="photo-inspection-grid">
+          <div class="inspection-photo-card">
+            <span class="inspection-photo-tag tag-before">PRE-SERVICE INTAKE</span>
+            <img id="vd-photo-before" class="inspection-img" src="assets/images/vehicle_before.jpg" alt="Vehicle Pre-wash">
+          </div>
+          <div class="inspection-photo-card">
+            <span class="inspection-photo-tag tag-after">CERAMIC SHINE</span>
+            <img id="vd-photo-after" class="inspection-img" src="assets/images/vehicle_after.jpg" alt="Vehicle Ceramic Finish">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" id="vd-btn-book">ï¼‹ Book Wash for this Vehicle</button>
+        <button class="btn-secondary" id="vd-btn-edit">âœ Edit Vehicle</button>
+        <button class="btn-secondary modal-close-trigger">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Status Update Modal (Requirement 2 & 10) -->
+  <div class="modal-backdrop" id="update-booking-status-modal">
+    <div class="modal-container modal-sm">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>Update Booking Status</span>
+        </div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <form onsubmit="GingerApp.submitBookingStatusUpdate(event)">
+        <input type="hidden" id="status-update-booking-id">
+        <div class="modal-body custom-scroll">
+          <div style="background: var(--bg-surface-elevated); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); margin-bottom: 16px;">
+            <div style="font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; font-weight: 700;">Booking Target</div>
+            <div id="status-update-booking-info" style="font-weight: 700; color: var(--text-primary); margin-top: 4px; font-size: 13.5px;">BK-2026-00482</div>
+            <div id="status-update-current-badge" style="margin-top: 6px;"></div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label">New Status <span class="required">*</span></label>
+            <select class="form-control" id="status-update-select" required>
+              <option value="Confirmed">Confirmed</option>
+              <option value="Checked In">Checked In</option>
+              <option value="In Service">In Service</option>
+              <option value="Quality Check">Quality Check</option>
+              <option value="Ready for Pickup">Ready for Pickup</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Operational Note / Remarks</label>
+            <input type="text" class="form-control" id="status-update-note" placeholder="e.g. Completed QA inspection, ready for pickup...">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn-primary">Save Status</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 20. User & Role Modals -->
+  <div class="modal-backdrop" id="user-form-modal">
+    <div class="modal-container modal-sm">
+      <div class="modal-header">
+        <div class="modal-title">Add User Account</div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <form onsubmit="GingerApp.saveUser(event)">
+        <div class="modal-body custom-scroll">
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Full Name <span class="required">*</span></label>
+            <input type="text" class="form-control" id="usr-name-input" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Email Address <span class="required">*</span></label>
+            <input type="email" class="form-control" id="usr-email-input" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Assigned Role</label>
+            <select class="form-control" id="usr-role-select">
+              <option value="Super Admin">Super Admin</option>
+              <option value="Admin">Admin</option>
+              <option value="Branch Manager">Branch Manager</option>
+              <option value="Lead Detailer / Technician">Lead Detailer / Technician</option>
+              <option value="Front Desk & Cashier">Front Desk & Cashier</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="form-control" id="usr-phone-input">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn-primary">Create User</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="role-form-modal">
+    <div class="modal-container modal-sm">
+      <div class="modal-header">
+        <div class="modal-title">Create Security Role</div>
+        <button class="modal-close-trigger modal-close-btn">âœ•</button>
+      </div>
+      <form onsubmit="GingerApp.saveRole(event)">
+        <div class="modal-body custom-scroll">
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Role Name <span class="required">*</span></label>
+            <input type="text" class="form-control" id="role-name-input" required placeholder="e.g. Senior QC Lead">
+          </div>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" id="role-desc-input" placeholder="Role responsibilities..."></textarea>
+          </div>
+          <div class="form-group">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px;">
+              <input type="checkbox" id="role-can-edit-inv">
+              <span>Grant Invoice Edit Rights</span>
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary modal-close-trigger">Cancel</button>
+          <button type="submit" class="btn-primary">Save Role</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- 22. Ginger Carwash Services Terminal Login & Authorization Modal -->
+  <div class="modal-backdrop" id="login-screen-modal">
+    <div class="modal-container modal-md" style="max-width: 540px; border: 1px solid var(--border-medium); box-shadow: 0 25px 60px -15px rgba(0,0,0,0.85);">
+      <div class="modal-header" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(16, 185, 129, 0.08)); border-bottom: 1px solid var(--border-subtle); padding: 18px 22px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div class="brand-icon" style="width: 44px; height: 44px; border-radius: var(--radius-md); background: linear-gradient(135deg, #2563eb, #1d4ed8); display: flex; align-items: center; justify-content: center; color: white;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"></path>
+              <circle cx="7" cy="17" r="2"></circle>
+              <path d="M9 17h6"></path>
+              <circle cx="17" cy="17" r="2"></circle>
+            </svg>
+          </div>
+          <div>
+            <div style="font-size: 18px; font-weight: 800; color: var(--text-primary); letter-spacing: -0.3px;">Ginger <span style="color: #3b82f6;">Carwash Services</span></div>
+            <div style="font-size: 12px; color: var(--text-tertiary);">Enterprise Operations & Detailing Terminal Access</div>
+          </div>
+        </div>
+        <button class="modal-close-trigger modal-close-btn" title="Close / Return to App">âœ•</button>
+      </div>
+      <div class="modal-body custom-scroll" style="padding: 24px;">
+        <!-- Fast Role Switcher -->
+        <div style="margin-bottom: 20px;">
+          <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-tertiary); letter-spacing: 0.5px; margin-bottom: 10px;">
+            1-Click Demo Session Switch (Select Role):
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <button type="button" class="btn-secondary" style="display: flex; flex-direction: column; align-items: flex-start; padding: 10px 12px; text-align: left; height: auto;" onclick="GingerApp.switchUser('rashid@gingercarwash.com')">
+              <div style="font-weight: 700; font-size: 13px; color: var(--text-primary);">Rashid Al-Kuwari</div>
+              <div style="font-size: 11px; color: #60a5fa;">ðŸ‘‘ Super Admin (Full Control)</div>
+            </button>
+            <button type="button" class="btn-secondary" style="display: flex; flex-direction: column; align-items: flex-start; padding: 10px 12px; text-align: left; height: auto;" onclick="GingerApp.switchUser('fatima@gingercarwash.com')">
+              <div style="font-weight: 700; font-size: 13px; color: var(--text-primary);">Fatima Al-Zahra</div>
+              <div style="font-size: 11px; color: #34d399;">âš™ Admin (Invoice Edit)</div>
+            </button>
+            <button type="button" class="btn-secondary" style="display: flex; flex-direction: column; align-items: flex-start; padding: 10px 12px; text-align: left; height: auto;" onclick="GingerApp.switchUser('sanjay@gingercarwash.com')">
+              <div style="font-weight: 700; font-size: 13px; color: var(--text-primary);">Sanjay Patel</div>
+              <div style="font-size: 11px; color: #fbbf24;">ðŸ“‹ Branch Manager (Central)</div>
+            </button>
+            <button type="button" class="btn-secondary" style="display: flex; flex-direction: column; align-items: flex-start; padding: 10px 12px; text-align: left; height: auto;" onclick="GingerApp.switchUser('aisha@gingercarwash.com')">
+              <div style="font-weight: 700; font-size: 13px; color: var(--text-primary);">Aisha Rahman</div>
+              <div style="font-size: 11px; color: #f472b6;">ðŸ’³ Front Desk & Cashier</div>
+            </button>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; margin: 18px 0; color: var(--text-muted); font-size: 11px; text-transform: uppercase;">
+          <div style="flex: 1; height: 1px; background: var(--border-subtle);"></div>
+          <span style="padding: 0 12px;">or sign in with credentials</span>
+          <div style="flex: 1; height: 1px; background: var(--border-subtle);"></div>
+        </div>
+
+        <!-- Credentials Form -->
+        <form onsubmit="GingerApp.submitLogin(event)">
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label">Authorized Staff Email / ID</label>
+            <input type="email" class="form-control" id="login-email-input" value="rashid@gingercarwash.com" required placeholder="name@gingercarwash.com">
+          </div>
+          <div class="form-group" style="margin-bottom: 18px;">
+            <label class="form-label">Security PIN / Password</label>
+            <input type="password" class="form-control" id="login-password-input" value="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required placeholder="Enter password">
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; font-size: 12px;">
+            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; color: var(--text-secondary);">
+              <input type="checkbox" checked>
+              <span>Remember station terminal</span>
+            </label>
+            <span style="color: var(--primary-500); cursor: pointer;" onclick="GingerApp.showToast('Security PIN reset requested. Contact Operations Director.', 'info')">Forgot PIN?</span>
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 12px; font-size: 14px; font-weight: 700;">
+            Sign In to Ginger Terminal â†’
+          </button>
+        </form>
+
+        <div style="margin-top: 20px; padding: 10px 14px; background: var(--bg-surface-elevated); border-radius: var(--radius-md); border: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; font-size: 11px; color: var(--text-tertiary);">
+          <span>Branch: Central Detailing Center</span>
+          <span style="font-family: var(--font-mono); color: #10b981;">â— Online (Secure TLS 1.3)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/invoice.js"></script>
+  <script src="js/workflow.js"></script>
+  <script src="js/reports.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/verify.js"></script>
+<script>
+  GingerApp.init();
+  GingerApp.openModal('add-booking-modal');
+  GingerApp.populateBookingCustomerDropdown();
+  var custSelect = document.getElementById('form-booking-customer');
+  if (custSelect) custSelect.value = 'CUST-1001';
+  GingerApp.onBookingCustomerChange('CUST-1001');
+  GingerApp.onBookingVehicleToggle('QTR 45821', true);
+  GingerApp.onBookingVehicleToggle('QTR 78231', true);
+  GingerApp.onBookingVehicleToggle('QTR 12456', true);
+
+  var srvPremium = GingerApp.data.services.find(function(s) { return s.name.indexOf("Premium Wash") >= 0 || s.id === "SRV-PREM" || s.id === "SRV-01"; });
+  var srvInterior = GingerApp.data.services.find(function(s) { return s.name.indexOf("Interior Cleaning") >= 0 || s.id === "SRV-INT" || s.id === "SRV-02"; });
+  var srvDetailing = GingerApp.data.services.find(function(s) { return s.name.indexOf("Full Detailing") >= 0 || s.id === "SRV-DET" || s.id === "SRV-04"; });
+
+  if (srvPremium) GingerApp.onVehicleServiceChange('QTR 45821', 'srv:' + srvPremium.id);
+  if (srvInterior) GingerApp.onVehicleServiceChange('QTR 78231', 'srv:' + srvInterior.id);
+  if (srvDetailing) GingerApp.onVehicleServiceChange('QTR 12456', 'srv:' + srvDetailing.id);
+
+  GingerApp.recalculateBookingForm();
+</script>
+</body>
+</html>
+

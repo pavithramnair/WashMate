@@ -1,0 +1,67 @@
+/* ==========================================================================
+   GINGER CARWASH SERVICES - PRINT STYLESHEET
+   Clean high-res paper output for Invoices & Job Sheets
+   ========================================================================== */
+
+@media print {
+  body, html {
+    background: #ffffff !important;
+    color: #000000 !important;
+    height: auto !important;
+    overflow: visible !important;
+    font-size: 12pt;
+  }
+
+  /* Hide app navigation and chrome */
+  .sidebar,
+  .topbar,
+  .module-header,
+  .filter-toolbar,
+  .modal-header,
+  .modal-footer,
+  .modal-backdrop:not(.printing),
+  #toast-container,
+  .no-print {
+    display: none !important;
+  }
+
+  .main-wrapper,
+  .page-content-area {
+    overflow: visible !important;
+    height: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #ffffff !important;
+  }
+
+  .modal-backdrop.printing {
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+
+  .modal-backdrop.printing .modal-container {
+    box-shadow: none !important;
+    border: none !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    transform: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .invoice-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    width: 100% !important;
+    color: #000000 !important;
+  }
+
+  .invoice-header-row,
+  .invoice-billing-cols,
+  .invoice-table {
+    page-break-inside: avoid;
+  }
+}

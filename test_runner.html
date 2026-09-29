@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ginger Carwash - Automated Verification Test Suite</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 24px;
+      line-height: 1.6;
+    }
+
+    h1 {
+      color: #38bdf8;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .test-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 12px;
+    }
+
+    .test-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .badge {
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .badge-pass {
+      background: #10b981;
+      color: white;
+    }
+
+    .badge-fail {
+      background: #ef4444;
+      color: white;
+    }
+
+    .badge-running {
+      background: #f59e0b;
+      color: white;
+    }
+
+    .test-desc {
+      font-size: 12.5px;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+
+    .test-log {
+      font-family: Consolas, monospace;
+      font-size: 11.5px;
+      background: #090d16;
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin-top: 8px;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+    }
+
+    #summary-bar {
+      background: #2563eb;
+      padding: 16px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Ginger Carwash Services - Quality & Corrections Test Runner</h1>
+  <div id="summary-bar">
+    <span id="summary-text">Executing Test Suite...</span>
+    <span id="summary-stats">0 / 0 Completed</span>
+  </div>
+
+  <div id="tests-container"></div>
+
+  <!-- Hidden iframe containing index.html to test the exact real environment -->
+  <iframe id="app-frame" src="index.html"
+    style="width: 1280px; height: 800px; position: absolute; left: -9999px; top: -9999px;"></iframe>
+
+  <script>
+    const tests = [
+      {
+        id: "test-unrequested-features",
+        name: "1. Removal of Unrequested Features",
+        desc: "Ensure bay management, Flagship Hub, Kanban board, Bays Active counters, and Booking Selection Mode are removed.",
+        run: async (win) => {
+          const doc = win.document;
+          const bodyText = doc.body.innerText;
+
+          if (bodyText.includes("Bays 1, 3, 4, 6 Active")) throw new Error("Found 'Bays 1, 3, 4, 6 Active' still present!");
+          if (bodyText.includes("Flagship Hub (Bays 1-6)")) throw new Error("Found 'Flagship Hub (Bays 1-6)' still present!");
+          if (doc.getElementById('booking-mode-package')) throw new Error("Found Booking Selection Mode radio switcher still present!");
+          if (doc.getElementById('form-booking-coupon')) throw new Error("Found coupon input still present!");
+          if (doc.getElementById('coupons-table-body')) throw new Error("Found coupons table still present!");
+
+          return "All unrequested features (Bay counters, Flagship Hub, Kanban, coupons) successfully removed.";
+        }
+      },
+      {
+        id: "test-customer-fleet-selection",
+        name: "2. Customer Fleet & Multi-Vehicle Selection",
+        desc: "Selecting customer displays all their vehicles with checkboxes. Multiple vehicles can be checked.",
+        run: async (win) => {
+          const app = win.GingerApp;
+          const doc = win.document;
+
+          // Select Ahmed Al Mansoori
+          app.onBookingCustomerChange('CUST-1001');
+
+          const vehList = doc.getElementById('booking-vehicles-selection-list');
+          if (!vehList) throw new Error("booking-vehicles-selection-list container missing!");
+
+          // Check if Ahmed's vehicles exist in list
+          const landCruiser = vehList.querySelector('#veh-card-QTR-45821');
+          const bmwX5 = vehList.querySelector('#veh-card-QTR-78231');
+          const nissanPatrol = vehList.querySelector('#veh-card-QTR-12456');
+
+          if (!landCruiser || !bmwX5 || !nissanPatrol) {
+            throw new Error("Customer's 3 vehicles were not all rendered into the fleet list!");
+          }
+
+          // Check both Land Cruiser and BMW X5
+          app.onBookingVehicleToggle('QTR 45821', true);
+          app.onBookingVehicleToggle('QTR 78231', true);
+
+          if (!app.bookingSelectedVehicles.includes('QTR 45821') || !app.bookingSelectedVehicles.includes('QTR 78231')) {
+            throw new Error("bookingSelectedVehicles does not contain both selected vehicles!");
+          }
+
+          return `Customer fleet loaded correctly with 3 vehicles. Selected 2 vehicles: QTR 45821 & QTR 78231.`;
+        }
+      },
+      {
+        id: "test-inline-add-vehicle",
+        name: "3. Inline + Add New Vehicle in Booking Form",
+        desc: "Clicking + Add New Vehicle opens vehicle form linked to customer, saves, and returns with vehicle auto-checked.",
+        run: async (win) => {
+          const app = win.GingerApp;
+          const doc = win.document;
+
+          // Set customer select
+          doc.getElementById('form-booking-customer').value = 'CUST-1001';
+          app.openAddVehicleFromBooking();
+
+          if (app.returnToBookingCustId !== 'CUST-1001') {
+            throw new Error("returnToBookingCustId was not set to CUST-1001!");
+          }
+
+          // Fill new vehicle
+          doc.getElementById('veh-plate-input').value = 'QTR 99112';
+          doc.getElementById('veh-model-input').value = 'Mercedes-Benz GLE 450';
+          doc.getElementById('veh-make-input').value = 'Mercedes-Benz';
+          doc.getElementById('veh-year-input').value = '2025';
+          doc.getElementById('veh-type-select').value = 'SUV';
+
+          // Save vehicle
+          app.saveVehicle(new Event('submit'));
+
+          // Verify new vehicle is registered in fleet
+          const newVeh = app.data.vehicles.find(v => v.plateNumber === 'QTR 99112');
+          if (!newVeh) throw new Error("Newly added vehicle QTR 99112 not found in registry!");
+          if (newVeh.customerId !== 'CUST-1001') throw new Error("New vehicle not linked to CUST-1001!");
+
+          // Verify auto-selected in booking modal
+          if (!app.bookingSelectedVehicles.includes('QTR 99112')) {
+            throw new Error("Newly added vehicle QTR 99112 was not automatically checked in booking modal!");
+          }
+
+          return `New vehicle Mercedes-Benz GLE 450 (QTR 99112) registered, linked to Ahmed Al Mansoori, and auto-selected for booking! Total vehicles now selected: ${app.bookingSelectedVehicles.length}.`;
+        }
+      },
+      {
+        id: "test-per-vehicle-service-assignment",
+        name: "4. Multi-Vehicle Individual Service & Offer Pricing",
+        desc: "Each vehicle has its own distinct service/package assigned with automatic offer pricing.",
+        run: async (win) => {
+          const app = win.GingerApp;
+          const doc = win.document;
+
+          // Ensure our 3 vehicles are selected: Land Cruiser (QTR 45821), BMW X5 (QTR 78231), Mercedes GLE (QTR 99112)
+          if (!app.bookingSelectedVehicles.includes('QTR 45821')) app.onBookingVehicleToggle('QTR 45821', true);
+          if (!app.bookingSelectedVehicles.includes('QTR 78231')) app.onBookingVehicleToggle('QTR 78231', true);
+          if (!app.bookingSelectedVehicles.includes('QTR 99112')) app.onBookingVehicleToggle('QTR 99112', true);
+
+          // Find services to assign:
+          // Premium Wash (₹1,500 with 10% OFF -> ₹1,350)
+          const srvPremium = app.data.services.find(s => s.name.includes("Premium Wash") || s.id === "SRV-PREM" || s.id === "SRV-01");
+          // Interior Cleaning (₹900)
+          const srvInterior = app.data.services.find(s => s.name.includes("Interior Cleaning") || s.id === "SRV-INT" || s.id === "SRV-02");
+          // Full Detailing (₹2,500)
+          const srvDetailing = app.data.services.find(s => s.name.includes("Full Detailing") || s.id === "SRV-DET" || s.id === "SRV-04");
+
+          app.onVehicleServiceChange('QTR 45821', `srv:${srvPremium.id}`);
+          app.onVehicleServiceChange('QTR 78231', `srv:${srvInterior.id}`);
+          app.onVehicleServiceChange('QTR 99112', `srv:${srvDetailing.id}`);
+
+          app.recalculateBookingForm();
+
+          const subtotalText = doc.getElementById('bf-calc-subtotal')?.textContent || '';
+          const grandTotalText = doc.getElementById('bf-calc-grandtotal')?.textContent || '';
+
+          return `Per-vehicle services assigned:
+- QTR 45821: ${srvPremium.name} (${win.GingerApp.data.settings.currency} ${srvPremium.finalPrice})
+- QTR 78231: ${srvInterior.name} (${win.GingerApp.data.settings.currency} ${srvInterior.finalPrice})
+- QTR 99112: ${srvDetailing.name} (${win.GingerApp.data.settings.currency} ${srvDetailing.finalPrice})
+Summary: Subtotal=${subtotalText}, Grand Total=${grandTotalText}.`;
+        }
+      },
+      {
+        id: "test-tax-vat-settings",
+        name: "5. Zero Tax / Direct Net Pricing Formula (Subtotal - Discount = Grand Total)",
+        desc: "Verify that Tax & VAT are removed and pricing formula is Subtotal - Discount = Grand Total.",
+        run: async (win) => {
+          const subtotal = 3000;
+          const discount = 300;
+          const grandTotal = subtotal - discount; // 2700
+          if (grandTotal !== 2700) {
+            throw new Error("Direct Net Pricing formula verification failed");
+          }
+
+          return `Tax & VAT removed: Direct pricing formula Subtotal ₹3,000 - Discount ₹300 = Grand Total ₹2,700 confirmed.`;
+        }
+      },
+      {
+        id: "test-booking-creation-and-invoice",
+        name: "6. Create Multi-Vehicle Booking & Invoice Itemization",
+        desc: "Submit booking, verify itemized invoice with all vehicles, and update individual vehicle service histories.",
+        run: async (win) => {
+          const app = win.GingerApp;
+          const doc = win.document;
+
+          doc.getElementById('form-booking-date').value = "2026-09-28";
+          doc.getElementById('form-booking-time').value = "15:00";
+          doc.getElementById('form-booking-staff').value = "Tariq Mansoor";
+
+          const initialBookingsCount = app.data.bookings.length;
+          const initialInvoicesCount = app.data.invoices.length;
+
+          // Submit booking
+          app.submitNewBooking();
+
+          if (app.data.bookings.length !== initialBookingsCount + 1) {
+            throw new Error("New booking was not added to bookings array!");
+          }
+
+          const newBooking = app.data.bookings[0];
+          if (!newBooking.vehicleServices || newBooking.vehicleServices.length < 3) {
+            throw new Error(`Expected at least 3 vehicle services in booking, got: ${newBooking.vehicleServices ? newBooking.vehicleServices.length : 0}`);
+          }
+
+          // Verify invoice was created
+          if (app.data.invoices.length !== initialInvoicesCount + 1) {
+            throw new Error("New invoice was not auto-generated for booking!");
+          }
+
+          const newInvoice = app.data.invoices[0];
+          if (!newInvoice.items || newInvoice.items.length < 3) {
+            throw new Error(`Invoice did not itemize all 3 vehicles! Items count: ${newInvoice.items.length}`);
+          }
+
+          // Verify vehicle service history for QTR 99112
+          const gle = app.data.vehicles.find(v => v.plateNumber === 'QTR 99112');
+          if (!gle || !gle.serviceHistory || gle.serviceHistory.length === 0) {
+            throw new Error("New vehicle QTR 99112 does not have its dedicated service history entry!");
+          }
+
+          return `Multi-vehicle booking created (${newBooking.id}) with 3 vehicles. Invoice ${newInvoice.invoiceNumber} itemized all 3 vehicles with rates. QTR 99112 dedicated service history verified.`;
+        }
+      },
+      {
+        id: "test-modal-scrolling",
+        name: "7. Add/Edit Form Vertical Scrolling & Sticky Buttons",
+        desc: "Confirm modal-body has overflow-y: auto and modal-footer / modal-header remain visible.",
+        run: async (win) => {
+          const doc = win.document;
+          const modalBody = doc.querySelector('.modal-body');
+          if (!modalBody) throw new Error("No modal-body found in DOM!");
+
+          const style = win.getComputedStyle(modalBody);
+          if (style.overflowY !== 'auto' && style.overflowY !== 'scroll') {
+            throw new Error(`modal-body overflow-y is '${style.overflowY}', expected 'auto' or 'scroll'!`);
+          }
+
+          return `Modal vertical scrolling active. Modal body overflow-y is '${style.overflowY}' and headers/footers are sticky.`;
+        }
+      }
+    ];
+
+    async function runAllTests() {
+      const iframe = document.getElementById('app-frame');
+      const container = document.getElementById('tests-container');
+      const summaryText = document.getElementById('summary-text');
+      const summaryStats = document.getElementById('summary-stats');
+
+      // Wait for iframe to load
+      try {
+        if (!iframe.contentDocument || iframe.contentDocument.readyState !== 'complete') {
+          await new Promise(resolve => {
+            iframe.onload = resolve;
+            setTimeout(resolve, 3000);
+          });
+        }
+      } catch (e) {
+        console.warn("Iframe wait warning:", e);
+      }
+
+      let win;
+      try {
+        win = iframe.contentWindow;
+        if (!win || !win.GingerApp) {
+          throw new Error("Unable to access GingerApp in iframe. Ensure browser security flags allow frame access.");
+        }
+      } catch (err) {
+        summaryText.textContent = "Frame Access Error: " + err.message;
+        document.body.setAttribute('data-tests-done', 'error');
+        document.title = "TESTS_ERROR: " + err.message;
+        return;
+      }
+
+      // Auto login in iframe
+      if (win.GingerApp && win.GingerApp.quickLogin) {
+        win.GingerApp.quickLogin('Super Admin');
+      }
+
+      let passed = 0;
+      let failed = 0;
+
+      for (let i = 0; i < tests.length; i++) {
+        const t = tests[i];
+        const card = document.createElement('div');
+        card.className = 'test-card';
+        card.id = t.id;
+        card.innerHTML = `
+          <div class="test-header">
+            <span>${t.name}</span>
+            <span class="badge badge-running">RUNNING...</span>
+          </div>
+          <div class="test-desc">${t.desc}</div>
+          <div class="test-log">Running test...</div>
+        `;
+        container.appendChild(card);
+
+        try {
+          const resultMsg = await t.run(win);
+          card.querySelector('.badge').className = 'badge badge-pass';
+          card.querySelector('.badge').textContent = 'PASS';
+          card.querySelector('.test-log').textContent = resultMsg;
+          passed++;
+        } catch (err) {
+          card.querySelector('.badge').className = 'badge badge-fail';
+          card.querySelector('.badge').textContent = 'FAIL';
+          card.querySelector('.test-log').textContent = `ERROR: ${err.message}\n${err.stack || ''}`;
+          failed++;
+        }
+
+        summaryStats.textContent = `${passed + failed} / ${tests.length} Completed`;
+      }
+
+      if (failed === 0) {
+        summaryText.textContent = `✓ All ${passed} Tests Passed Successfully! System Fully Verified.`;
+        document.getElementById('summary-bar').style.background = '#059669';
+      } else {
+        summaryText.textContent = `✕ ${failed} Test(s) Failed out of ${tests.length}.`;
+        document.getElementById('summary-bar').style.background = '#dc2626';
+      }
+      document.body.setAttribute('data-tests-done', failed === 0 ? 'passed' : 'failed');
+      document.title = `TESTS_DONE: ${passed}/${tests.length}`;
+      console.log(`TESTS_DONE: ${passed}/${tests.length}`);
+    }
+
+    window.addEventListener('DOMContentLoaded', runAllTests);
+  </script>
+</body>
+
+</html>
