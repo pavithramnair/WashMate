@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Ginger WashMate - Master Application Controller
  * Handles SPA navigation, theme switching (Light/Dark), full CRUD operations,
  * Packages module, and interactive state management.
@@ -158,7 +158,10 @@ const GingerApp = {
     else if (moduleName === 'settings') {
       this.renderSettingsModule();
     }
+    // Close mobile sidebar after navigation
+    this.closeMobileSidebar();
   },
+
 
   setupNavigation: function () {
     const self = this;
@@ -5245,6 +5248,54 @@ const GingerApp = {
   onVatToggleChange: function () {},
   updateTaxVatPreview: function () {},
   saveTaxVatSettings: function (e) { if (e) e.preventDefault(); },
+
+  // =========================================================================
+  // MOBILE RESPONSIVE: SIDEBAR & SEARCH OVERLAY
+  // =========================================================================
+  openMobileSidebar: function () {
+    const sidebar = document.getElementById('main-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    if (sidebar) sidebar.classList.add('mobile-open');
+    if (overlay) {
+      overlay.classList.add('active');
+      overlay.style.display = 'block';
+    }
+    document.body.style.overflow = 'hidden';
+  },
+
+  closeMobileSidebar: function () {
+    const sidebar = document.getElementById('main-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    if (sidebar) sidebar.classList.remove('mobile-open');
+    if (overlay) {
+      overlay.classList.remove('active');
+      setTimeout(() => { overlay.style.display = 'none'; }, 300);
+    }
+    document.body.style.overflow = '';
+  },
+
+  toggleMobileSidebar: function () {
+    const sidebar = document.getElementById('main-sidebar');
+    if (sidebar && sidebar.classList.contains('mobile-open')) {
+      this.closeMobileSidebar();
+    } else {
+      this.openMobileSidebar();
+    }
+  },
+
+  openMobileSearch: function () {
+    const overlay = document.getElementById('mobile-search-overlay');
+    if (overlay) {
+      overlay.classList.add('active');
+      const input = document.getElementById('mobile-search-input');
+      if (input) setTimeout(() => input.focus(), 100);
+    }
+  },
+
+  closeMobileSearch: function () {
+    const overlay = document.getElementById('mobile-search-overlay');
+    if (overlay) overlay.classList.remove('active');
+  },
 
   renderAll: function () {
     this.updateCurrentUserUI();

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 
 <head>
@@ -11,11 +11,33 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
   <link rel="stylesheet" href="css/print.css" media="print">
 </head>
 
 <body data-theme="dark">
   <div id="app-root">
+
+    <!-- Mobile sidebar overlay backdrop -->
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="GingerApp.closeMobileSidebar()"></div>
+
+    <!-- Mobile search overlay -->
+    <div class="mobile-search-overlay" id="mobile-search-overlay">
+      <div class="global-search-container">
+        <svg class="global-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+        <input type="text" class="global-search-input" id="mobile-search-input"
+          placeholder="Search packages, customers, plates, bookings...">
+      </div>
+      <button class="mobile-search-close" id="mobile-search-close-btn" onclick="GingerApp.closeMobileSearch()" title="Close Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
 
     <!-- =====================================================================
          SIDEBAR NAVIGATION
@@ -220,6 +242,14 @@
       <!-- TOPBAR -->
       <header class="topbar">
         <div class="topbar-left">
+          <!-- Mobile hamburger menu -->
+          <button class="mobile-menu-btn" id="mobile-menu-btn" onclick="GingerApp.toggleMobileSidebar()" title="Open Navigation Menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
           <nav class="page-breadcrumb">
             <a href="#" onclick="GingerApp.navigateTo('dashboard'); return false;">Ginger Carwash Services</a>
             <span class="page-breadcrumb-separator">/</span>
@@ -240,6 +270,13 @@
         </div>
 
         <div class="topbar-right">
+          <!-- Mobile search button (visible only on mobile) -->
+          <button class="mobile-search-btn" id="mobile-search-btn" onclick="GingerApp.openMobileSearch()" title="Search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </button>
           <!-- LIGHT / DARK MODE TOGGLE BUTTON -->
           <button class="topbar-action-btn" id="theme-toggle-btn" onclick="GingerApp.toggleTheme()"
             title="Toggle Light / Dark Mode">
